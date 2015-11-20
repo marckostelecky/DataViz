@@ -11,14 +11,21 @@
   <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
 </head>
 <body>
+<!-- Div that contains the navbar on the top of the screen -->
 <div id="container">
   <nav class="navbar navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-
-        <a class="test"><i class="fa fa-cube"></i></a>
-      </div>
+        <a class="navbar-brand darkbar" href="#"><i class="fa fa-cube"></i><span class="logoText">DataViz</span></a>
+        <div class="col-md-3 col-md-offset-1">
+        <!-- <div class="bufferSpace"></div> -->
+        <ul class="nav navbar-nav navbar-left option-icons">
+          <li class="create"><i class="fa fa-file-o"></i></li>
+          <li class="add"><i class="fa fa-plus"></i></li>
+          <li class="delete"><i class="fa fa-minus"></i></li>
+        </ul>
+    </div>
     </div>
     </nav>
     </div>
