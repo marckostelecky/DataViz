@@ -208,31 +208,36 @@ body {
 }
 
 .option-icons li {
-  display: inline;
+  display: inline-block;
   height: 50px;
   width: 50px;
-  padding-right: 15px;
-  padding-left: 15px;
-  padding-bottom: 15px;
-  padding-top: 20px;
-
+  margin-top: -8px;
+  margin-bottom: -8px;
+  vertical-align: middle;
+  text-align: center;
+  padding-top: 12px;
 }
 
 .create {
-  color: #e0e0e0;
+  color: #2e59a0;
   -o-transition: .4s, width 1s;
   -ms-transition: .4s, width 1s;
   -moz-transition: .4s, width 1s;
   -webkit-transition: .4s, width 1s;
-  -webkit-backface-visibility: hidden;
+  /* -webkit-backface-visibility: hidden; */
   /* Chrome, Safari, Opera */
   backface-visibility: hidden;
-  background-color: #1414a0;
-  white-space: nowrap;
+ /* background-color: #1414a0; */
+  margin-right: -5px;
+ }
+
+.create:hover {
+  color: #e0e0e0;
+  background-color: #2e59a0;
 }
 
 .add {
-  color: #e0e0e0;
+  color: #42a021;
   -o-transition: .4s, width 1s;
   -ms-transition: .4s, width 1s;
   -moz-transition: .4s, width 1s;
@@ -240,12 +245,18 @@ body {
   -webkit-backface-visibility: hidden;
   /* Chrome, Safari, Opera */
   backface-visibility: hidden;
-  background-color: #42a021;
+ /* background-color: #42a021; */
   white-space: nowrap;
+  margin-right: -4px;
+}
+
+.add:hover {
+  color: #e0e0e0;
+  background-color: #42a021;
 }
 
 .delete {
-  color: #e0e0e0;
+  color: #a0141b;
   -o-transition: .4s, width 1s;
   -ms-transition: .4s, width 1s;
   -moz-transition: .4s, width 1s;
@@ -253,6 +264,12 @@ body {
   -webkit-backface-visibility: hidden;
   /* Chrome, Safari, Opera */
   backface-visibility: hidden;
-  background-color: #a0141b;
+ /* background-color: #a0141b; */
   white-space: nowrap;
+  margin-right: -4px;
+}
+
+.delete:hover {
+  color: #e0e0e0;
+  background-color: #a0141b;
 }
