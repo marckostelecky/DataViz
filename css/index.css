@@ -236,6 +236,24 @@ body {
   background-color: #2e59a0;
 }
 
+.upload {
+  color: #d24913;
+  -o-transition: .4s, width 1s;
+  -ms-transition: .4s, width 1s;
+  -moz-transition: .4s, width 1s;
+  -webkit-transition: .4s, width 1s;
+  /* -webkit-backface-visibility: hidden; */
+  /* Chrome, Safari, Opera */
+  backface-visibility: hidden;
+  /* background-color: #1414a0; */
+  margin-right: -5px;
+}
+
+.upload:hover {
+  color: #e0e0e0;
+  background-color: #d24913;
+}
+
 .add {
   color: #42a021;
   -o-transition: .4s, width 1s;
