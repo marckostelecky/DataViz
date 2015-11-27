@@ -221,10 +221,6 @@ body {
 
 .create {
   color: #2e59a0;
-  -o-transition: .4s;
-  -ms-transition: .4s;
-  -moz-transition: .4s;
-  -webkit-transition: .4s;
   /* -webkit-backface-visibility: hidden; */
   /* Chrome, Safari, Opera */
   backface-visibility: hidden;
@@ -239,10 +235,6 @@ body {
 
 .upload {
   color: #d24913;
-  -o-transition: .4s;
-  -ms-transition: .4s;
-  -moz-transition: .4s;
-  -webkit-transition: .4s;
   /* -webkit-backface-visibility: hidden; */
   /* Chrome, Safari, Opera */
   backface-visibility: hidden;
@@ -257,10 +249,6 @@ body {
 
 .add {
   color: #42a021;
-  -o-transition: .4s;
-  -ms-transition: .4s;
-  -moz-transition: .4s;
-  -webkit-transition: .4s;
   -webkit-backface-visibility: hidden;
   /* Chrome, Safari, Opera */
   backface-visibility: hidden;
@@ -276,10 +264,6 @@ body {
 
 .delete {
   color: #a0141b;
-  -o-transition: .4s;
-  -ms-transition: .4s;
-  -moz-transition: .4s;
-  -webkit-transition: .4s;
   -webkit-backface-visibility: hidden;
   /* Chrome, Safari, Opera */
   backface-visibility: hidden;
@@ -298,35 +282,35 @@ body {
   opacity: 0;
   z-index: -10;
   position: absolute;
-  transform: translateY(50px);
-  -webkit-transform: translateY(50px);
+  transform: translateY(26px);
+  -webkit-transform: translateY(26px);
   transition: all 0.2s;
   padding: 10px 15px 10px 15px;
 
 }
 
-.option-icons li:hover .hoverinfo {
+.hoverinfo.active {
   visibility: visible;
   opacity: 1;
   z-index: 10;
   display: block;
-  transform: translateY(38px);
-  -webkit-transform: translateY(38px);
+  transform: translateY(14px);
+  -webkit-transform: translateY(14px);
   cursor: pointer;
 }
 
-.hover-create {
+.create .hoverinfo{
   background: #2e59a0;
 }
 
-.hover-upload {
+.upload .hoverinfo {
   background: #d24913;
 }
 
-.hover-add {
+.add .hoverinfo {
   background: #42a021;
 }
 
-.hover-delete {
+.delete .hoverinfo {
   background: #a0141b;
 }
