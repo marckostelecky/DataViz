@@ -8,7 +8,12 @@
   <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="../css/index.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="../js/bootstrap.js"></script>
+  <script src="../js/tests/vendor/tether.min.js"></script>
+  <script src="../js/script.js"></script>
   <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
 </head>
 <body>
 <!-- Div that contains the navbar on the top of the screen -->
@@ -21,13 +26,26 @@
         <div class="col-md-3 col-md-offset-1">
         <!-- <div class="bufferSpace"></div> -->
         <ul class="nav navbar-nav navbar-left option-icons">
-          <li class="create"><i class="fa fa-file"></i><!--<span id="createText">Create New Data Set</span>--></li>
-          <li class="upload"><i class="fa fa-upload"></i></li>
-          <li class="add"><i class="fa fa-plus"></i></li>
-          <li class="delete"><i class="fa fa-minus"></i></li>
+          <li class="create">
+            <div class="hoverinfo hover-create">Create New Data Set</div>
+            <i class="fa fa-file"></i>
+          </li>
+          <li class="upload">
+            <div class="hoverinfo hover-upload">Upload Data Set</div>
+            <i class="fa fa-upload"></i>
+          </li>
+          <li class="add">
+            <div class="hoverinfo hover-add">Add Element</div>
+            <i class="fa fa-plus"></i>
+          </li>
+          <li class="delete">
+            <div class="hoverinfo hover-delete">Delete Element</div>
+            <i class="fa fa-minus"></i>
+          </li>
         </ul>
     </div>
     </div>
+      </div>
     </nav>
     </div>
 </body>

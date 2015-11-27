@@ -171,10 +171,10 @@ body {
 }
 .navbar-brand.darkbar {
   background-color: #222222;
-  -o-transition: .2s;
+ /* -o-transition: .2s;
   -ms-transition: .2s;
   -moz-transition: .2s;
-  -webkit-transition: .2s;
+  -webkit-transition: .2s; */
   margin-left: -15px;
   margin-right: 15px;
   margin-top: -8px;
@@ -220,10 +220,10 @@ body {
 
 .create {
   color: #2e59a0;
-  -o-transition: .4s, width 1s;
-  -ms-transition: .4s, width 1s;
-  -moz-transition: .4s, width 1s;
-  -webkit-transition: .4s, width 1s;
+  -o-transition: .4s;
+  -ms-transition: .4s;
+  -moz-transition: .4s;
+  -webkit-transition: .4s;
   /* -webkit-backface-visibility: hidden; */
   /* Chrome, Safari, Opera */
   backface-visibility: hidden;
@@ -238,10 +238,10 @@ body {
 
 .upload {
   color: #d24913;
-  -o-transition: .4s, width 1s;
-  -ms-transition: .4s, width 1s;
-  -moz-transition: .4s, width 1s;
-  -webkit-transition: .4s, width 1s;
+  -o-transition: .4s;
+  -ms-transition: .4s;
+  -moz-transition: .4s;
+  -webkit-transition: .4s;
   /* -webkit-backface-visibility: hidden; */
   /* Chrome, Safari, Opera */
   backface-visibility: hidden;
@@ -256,10 +256,10 @@ body {
 
 .add {
   color: #42a021;
-  -o-transition: .4s, width 1s;
-  -ms-transition: .4s, width 1s;
-  -moz-transition: .4s, width 1s;
-  -webkit-transition: .4s, width 1s;
+  -o-transition: .4s;
+  -ms-transition: .4s;
+  -moz-transition: .4s;
+  -webkit-transition: .4s;
   -webkit-backface-visibility: hidden;
   /* Chrome, Safari, Opera */
   backface-visibility: hidden;
@@ -275,10 +275,10 @@ body {
 
 .delete {
   color: #a0141b;
-  -o-transition: .4s, width 1s;
-  -ms-transition: .4s, width 1s;
-  -moz-transition: .4s, width 1s;
-  -webkit-transition: .4s, width 1s;
+  -o-transition: .4s;
+  -ms-transition: .4s;
+  -moz-transition: .4s;
+  -webkit-transition: .4s;
   -webkit-backface-visibility: hidden;
   /* Chrome, Safari, Opera */
   backface-visibility: hidden;
@@ -290,4 +290,40 @@ body {
 .delete:hover {
   color: #e0e0e0;
   background-color: #a0141b;
+}
+
+.hoverinfo {
+  visibility: hidden;
+  opacity: 0;
+  z-index: -10;
+  position: absolute;
+  padding: 5px;
+  transform: translateY(50px);
+  -webkit-transform: translateY(50px);
+  transition: all 0.2s;
+}
+
+.option-icons li:hover .hoverinfo {
+  visibility: visible;
+  opacity: 1;
+  z-index: 10;
+  display: block;
+  transform: translateY(38px);
+  -webkit-transform: translateY(38px);
+}
+
+.hover-create {
+  background: #2e59a0;
+}
+
+.hover-upload {
+  background: #d24913;
+}
+
+.hover-add {
+  background: #42a021;
+}
+
+.hover-delete {
+  background: #a0141b;
 }
