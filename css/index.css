@@ -216,6 +216,7 @@ body {
   vertical-align: middle;
   text-align: center;
   padding-top: 12px;
+  cursor: pointer;
 }
 
 .create {
@@ -297,10 +298,11 @@ body {
   opacity: 0;
   z-index: -10;
   position: absolute;
-  padding: 5px;
   transform: translateY(50px);
   -webkit-transform: translateY(50px);
   transition: all 0.2s;
+  padding: 10px 15px 10px 15px;
+
 }
 
 .option-icons li:hover .hoverinfo {
@@ -310,6 +312,7 @@ body {
   display: block;
   transform: translateY(38px);
   -webkit-transform: translateY(38px);
+  cursor: pointer;
 }
 
 .hover-create {
