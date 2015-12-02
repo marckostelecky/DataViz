@@ -109,6 +109,21 @@ body {
   background-color: #a0141b;
 }
 
+.options {
+  color: #d2428f;
+  -webkit-backface-visibility: hidden;
+  /* Chrome, Safari, Opera */
+  backface-visibility: hidden;
+  /* background-color: #a0141b; */
+  white-space: nowrap;
+  margin-right: -4px;
+}
+
+.options:hover {
+  color: #e0e0e0;
+  background-color:  #d2428f;
+}
+
 .hoverinfo {
   visibility: hidden;
   opacity: 0;
@@ -146,3 +161,14 @@ body {
 .delete .hoverinfo {
   background: #a0141b;
 }
+
+.options .hoverinfo {
+  background: #d2428f;
+}
+
+.state-boundary {
+ 	fill: none;
+ 	stroke: #777;
+ 	stroke-dasharray: 2,2;
+ 	stroke-linejoin: round;
+ }
