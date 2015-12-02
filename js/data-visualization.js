@@ -30,7 +30,7 @@ function map() {
 		console.log(us);
 
 		// Read in the map data.
-		var subunits = topojson.feature(us, us.objects.subunits);
+		var units = topojson.feature(us, us.objects.units);
 		// Choose a projection for the map data.
 		var projection = d3.geo.albers()
 			.center([0, 38])
@@ -41,7 +41,12 @@ function map() {
 		var path = d3.geo.path().projection(projection);
 
 		svg.append("path")
-			.datum(subunits)
-			.attr("d", path);
+			.datum(units)
+			.attr("d", path)
+			.attr("id", "map");
+		svg.append("path")
+			.datum(topojson.mesh(us, us.objects.units, function(a, b) { return a !== b; }))
+			.attr("d", path)
+			.attr("class", "state-boundary");
 	});
 }
