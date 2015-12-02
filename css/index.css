@@ -26,6 +26,10 @@ body {
   padding-left: 0px;
 }
 
+.navbar-right {
+  float: right!important;
+}
+
 .navbar a {
   text-size: 16px;
   color: #e0e0e0;
@@ -116,7 +120,7 @@ body {
   backface-visibility: hidden;
   /* background-color: #a0141b; */
   white-space: nowrap;
-  margin-right: -4px;
+  margin-right: -31px;
 }
 
 .options:hover {
@@ -163,6 +167,12 @@ body {
 }
 
 .options .hoverinfo {
+  transform: translateY(26px) translateX(-38px);
+  background: #d2428f;
+}
+
+.options .hoverinfo.active {
+  transform: translateY(14px) translateX(-38px);
   background: #d2428f;
 }
 
