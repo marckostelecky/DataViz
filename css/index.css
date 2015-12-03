@@ -176,9 +176,17 @@ body {
   background: #d2428f;
 }
 
+.map {
+	fill: #ccc;
+}
+
 .state-boundary {
  	fill: none;
- 	stroke: #777;
+ 	stroke: #555;
  	stroke-dasharray: 2,2;
  	stroke-linejoin: round;
- }
+}
+
+.place {
+	fill: #666;
+}
