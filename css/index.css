@@ -261,6 +261,19 @@ body {
   transform: translateY(-36px) translateX(50px);
 }
 
+.background-body {
+  position: absolute;
+  top: 25%;
+  left: 40%;
+  color: gray;
+  opacity: .15;
+  margin: 0 auto;
+}
+
+.big-icon {
+  font-size: 400px;
+}
+
 .map {
 	fill: #ccc;
 }
