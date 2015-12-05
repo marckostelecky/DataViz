@@ -190,3 +190,7 @@ body {
 .place {
 	fill: #666;
 }
+
+.data-point {
+	fill: black;
+}
