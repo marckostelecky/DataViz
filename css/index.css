@@ -3,10 +3,7 @@ body {
 }
 .navbar-brand.darkbar {
   background-color: #222222;
- /* -o-transition: .2s;
-  -ms-transition: .2s;
-  -moz-transition: .2s;
-  -webkit-transition: .2s; */
+ transition: all 0.2s;
   margin-left: -15px;
   margin-right: 15px;
   margin-top: -8px;
@@ -69,6 +66,12 @@ body {
   background-color: #2e59a0;
 }
 
+.create li{
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  white-space: nowrap;
+}
 .upload {
   color: #d24913;
   /* -webkit-backface-visibility: hidden; */
@@ -137,7 +140,6 @@ body {
   -webkit-transform: translateY(26px);
   transition: all 0.2s;
   padding: 10px 15px 10px 15px;
-
 }
 
 .hoverinfo.active {
@@ -148,9 +150,76 @@ body {
   transform: translateY(14px);
   -webkit-transform: translateY(14px);
   cursor: pointer;
+  transition: all 0.2s;
+}
+
+.create .hoverinfo {
+  width: 190px;
+}
+
+.create .hoverinfo.clicked {
+  width: 250px;
+}
+
+.hoverinfo2 {
+  visibility: hidden;
+  opacity: 0;
+  z-index: -10;
+  position: absolute;
+  transition: all 0.2s;
+  padding: 13px 15px 13px 15px;
+  background: #2e59a0;
+  width: 150px;
+}
+
+.hoverinfo2.active {
+  visibility: visible;
+  opacity: 1;
+  z-index: 10;
+  display: block;
+  cursor: pointer;
+  background: #2e59a0;
+  width: 150px;
+}
+
+.clickinfo {
+  visibility: hidden;
+  opacity: 0;
+  z-index: -10;
+  position: absolute;
+  transform: translateY(68px) translateX(-15px);
+  -webkit-transform: translateY(68px) translateX(-15px);
+  transition: all 0.2s;
+  padding: 10px 15px 10px 15px;
+}
+
+.clickinfo.active {
+  visibility: visible;
+  opacity: 1;
+  z-index: 10;
+  display: block;
+  transform: translateY(56px) translateX(-15px);
+  -webkit-transform: translateY(56px) translateX(-15px);
+  cursor: pointer;
 }
 
 .create .hoverinfo{
+  background: #2e59a0;
+}
+
+.create .barChart{
+  background: #224276;
+}
+
+.create .barChart:hover{
+  background: #2e59a0;
+}
+
+.create .mapChart{
+  background: #224276;
+}
+
+.create .mapChart:hover{
   background: #2e59a0;
 }
 
@@ -174,6 +243,22 @@ body {
 .options .hoverinfo.active {
   transform: translateY(14px) translateX(-38px);
   background: #d2428f;
+}
+
+.barChart .hoverinfo2{
+  transform: translateY(-36px) translateX(120px);
+}
+
+.barChart .hoverinfo2.active{
+  transform: translateY(-36px) translateX(100px);
+}
+
+.mapChart .hoverinfo2{
+  transform: translateY(-36px) translateX(70px);
+}
+
+.mapChart .hoverinfo2.active{
+  transform: translateY(-36px) translateX(50px);
 }
 
 .map {
