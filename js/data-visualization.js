@@ -7,7 +7,7 @@
  * work with d3 (d3js.org).
  */
 
-// This is the width and height of the map area.
+// This is the width and height of the visualization area.
 var width = 1024;
 var height = 786;
 
