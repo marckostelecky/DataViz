@@ -166,6 +166,14 @@ main {
   width: 250px;
 }
 
+.upload .hoverinfo {
+  width: 190px;
+}
+
+.upload .hoverinfo.clicked {
+  width: 270px;
+}
+
 .hoverinfo2 {
   visibility: hidden;
   opacity: 0;
@@ -173,8 +181,7 @@ main {
   position: absolute;
   transition: all 0.2s;
   padding: 13px 15px 13px 15px;
-  background: #2e59a0;
-  width: 150px;
+  white-space: nowrap;
 }
 
 .hoverinfo2.active {
@@ -183,8 +190,16 @@ main {
   z-index: 10;
   display: block;
   cursor: pointer;
-  background: #2e59a0;
+}
+
+.create .hoverinfo2 {
   width: 150px;
+  background: #2e59a0;
+}
+
+.upload .hoverinfo2 {
+  width: 170px;
+  background: #d24913;
 }
 
 .clickinfo {
@@ -212,7 +227,7 @@ main {
   background: #2e59a0;
 }
 
-.create .barChart{
+.create .barChart {
   background: #224276;
 }
 
@@ -229,6 +244,22 @@ main {
 }
 
 .upload .hoverinfo {
+  background: #d24913;
+}
+
+.upload .barChart{
+  background: #b24513;
+}
+
+.upload .barChart:hover{
+  background: #d24913;
+}
+
+.upload .mapChart{
+  background: #b24513;
+}
+
+.upload .mapChart:hover{
   background: #d24913;
 }
 
@@ -297,3 +328,19 @@ main {
 .data-point {
 	fill: black;
 }
+
+.dialogBox{
+  position: absolute;
+  alignment: center;
+}
+
+.createMap {
+  top: 20%;
+  left: 20%;
+  height: 600px;
+  width: 500px;
+  color: #e0e0e0;
+  background: #2e59a0;
+}
+
+
