@@ -1,5 +1,5 @@
 /*
- * data-visualization.js
+ * data-visualization-demos.js
  * Authors: Jordan Christiansen
  *
  * Here are a couple demos of the visualizations. These functions are called
@@ -17,29 +17,8 @@
  */
 function fuel_stations() {
 	// First, display the map.
-	map();
+	map("../data/altfuelstations.json");
 
-	d3.json("../data/altfuelstations.json", function(error, altfuelstations) {
-		if (error) return console.error(error);
-		console.log(altfuelstations);
-		// Choose a projection for the map data.
-		var projection = d3.geo.albers()
-			.center([0, 35])
-			.rotate([100, 0])
-			.parallels([25, 50])
-			.translate([width / 2, height / 2]);
-		// Generate the svg path from the data.
-		var projection_path = d3.geo.path().projection(projection);
-		projection_path.pointRadius(1);
-
-		// Add the data to the map.
-		map_svg = d3.select(".map");
-		map_svg.append("path")
-			.datum(topojson.feature(altfuelstations,
-						altfuelstations.objects.altfuelstations))
-			.attr("d", projection_path)
-			.attr("class", "data-point");
-	});
 }
 
 /*
