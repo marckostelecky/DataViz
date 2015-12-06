@@ -61,5 +61,20 @@ function map() {
  * Make a bar graph.
  */
 function bar(data) {
+	var bar_svg = d3.select("main").append("svg")
+		.attr("width", width)
+		.attr("height", height)
+		.attr("class", "bar-chart");
 
+	d3.json(data, function(error, enrollment) {
+		if (error) return console.error(error);
+		console.log(us);
+		
+		d3.select(".bar-chart")
+			.selectAll("div")
+			.data(data)
+			.enter().append("div")
+			.style("width", function(d) { return d * 10 + "px"; })
+			.text(function(d) { return d; });
+	});
 }

@@ -51,6 +51,7 @@ function fuel_stations() {
  * https://www.ndsu.edu/data/enrollment/annual/
  */
 function ndsu_enrollment() {
+	bar("..data/ndsu_enrollment.json");
 }
 
 /*
