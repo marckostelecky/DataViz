@@ -3,6 +3,7 @@
  */
 $(document).ready(function(){
   var uploadVisible = false;
+  var bg = document.getElementById("background");
   onHover();
   /*
    * onHover()
@@ -34,8 +35,8 @@ $(document).ready(function(){
               '<i class="fa fa-map"></i>' +
               '</li>';
           } else if (_this.attr('id') == "upload") {
-              var image = '';
-              upload();
+            var image = '';
+            upload();
           } else {
             var image = '';
           }
@@ -58,6 +59,17 @@ $(document).ready(function(){
               }, 50);
             },
 
+            click: function () {
+              var title = $(this).attr('data-title');
+              if (title == "New Bar Graph") {
+                // bar();
+              }
+              else if (title == "New Map Graph") {
+                bg.style.visibility = 'hidden';
+                map();
+              }
+            },
+
             mouseleave: function () {
               var hover = $(this).find(".hoverinfo2");
               hover.removeClass("active");
@@ -67,7 +79,7 @@ $(document).ready(function(){
             }
           });
         }
-          clicked = true;
+        clicked = true;
       },
       mouseleave: function () {
         var hover = $(this).find(".hoverinfo");
@@ -90,11 +102,10 @@ $(document).ready(function(){
    */
   function upload() {
     if (uploadVisible == false){
-    uploadVisible = true;
-    var bg = document.getElementById("background");
-    bg.style.visibility = 'hidden';
-    fuel_stations();
-  }}
+      uploadVisible = true;
+      bg.style.visibility = 'hidden';
+      fuel_stations();
+    }}
 });
 
 
