@@ -12,43 +12,7 @@ var width = 1024;
 var height = 786;
 
 /*
- * Alternative Fuel Stations
- *
- * This is a map of the locations of alternative fuel stations in the US. The
- * data is from data.gov and is licensed under the terms of the CC-by license.
- *
- * Data Source:
- * http://catalog.data.gov/dataset/alternative-fueling-station-locations-b550c
- */
-function fuel_stations() {
-	// First, display the map.
-	map();
-
-	d3.json("../data/altfuelstations.json", function(error, altfuelstations) {
-		if (error) return console.error(error);
-		console.log(altfuelstations);
-		// Choose a projection for the map data.
-		var projection = d3.geo.albers()
-			.center([0, 35])
-			.rotate([100, 0])
-			.parallels([25, 50])
-			.translate([width / 2, height / 2]);
-		// Generate the svg path from the data.
-		var projection_path = d3.geo.path().projection(projection);
-		projection_path.pointRadius(1);
-
-		// Add the data to the map.
-		map_svg = d3.select(".map");
-		map_svg.append("path")
-			.datum(topojson.feature(altfuelstations,
-						altfuelstations.objects.altfuelstations))
-			.attr("d", projection_path)
-			.attr("class", "data-point");
-	});
-}
-
-/*
- * Display the map using data from naturalearthdata.com.
+ * Display a US map using data from naturalearthdata.com.
  *
  * Data Sources:
  * http://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_1_states_provinces.zip
@@ -91,4 +55,11 @@ function map() {
 			.attr("d", projection_path)
 			.attr("class", "place");
 	});
+}
+
+/*
+ * Make a bar graph.
+ */
+function bar(data) {
+
 }
