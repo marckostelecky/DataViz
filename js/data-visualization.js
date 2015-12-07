@@ -8,8 +8,8 @@
  */
 
 // This is the width and height of the visualization area.
-var width = 1024;
-var height = 786;
+var svgWidth = 1024;
+var svgHeight = 786;
 
 /*
  * Display a US map using data from naturalearthdata.com.
@@ -24,8 +24,8 @@ function map(data) {
 
   // Create the svg element where we will create the map.
   var map_svg = d3.select("main").append("svg")
-    .attr("width", width)
-    .attr("height", height)
+    .attr("width", svgWidth)
+    .attr("height", svgHeight)
     .attr("class", "map");
 
   // Choose a projection for the map data.
@@ -33,7 +33,7 @@ function map(data) {
     .center([0, 35])
     .rotate([100, 0])
     .parallels([25, 50])
-    .translate([width / 2, height / 2]);
+    .translate([svgWidth / 2, svgHeight / 2]);
 
   // First, make the background map.
   d3.json("../data/us.json", function(error, us) {
@@ -84,9 +84,8 @@ function bar(barData) {
 
   // Create the svg element where we will create the bar graph.
   var barSvg = d3.select("main").append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .style("padding", "100px 100px 100px 100px")
+    .attr("width", svgWidth)
+    .attr("height", svgHeight)
     .attr("class", "barChart");
 
   // Set the dimentions and attributes of the bar chart.
@@ -96,7 +95,7 @@ function bar(barData) {
   var x = d3.scale.ordinal()
     .rangeRoundBands([0, chartWidth], .1);
   var y = d3.scale.linear()
-    .range([chartHeight/2, 0]);
+    .range([chartHeight, 0]);
 
   var xAxis = d3.svg.axis()
     .scale(x)
@@ -105,16 +104,23 @@ function bar(barData) {
     .scale(y)
     .orient("left");
 
-  // Plot the data.
+  // Draw the bar graph.
   x.domain(barData.data.map(function(d) { return d.category; }));
   y.domain([0, d3.max(barData.data, function(d) { return d.value; } )]);
   var barWidth = chartWidth / barData.data.length;
 
+  // Add the x axis.
   barSvg.append("g")
     .attr("class", "axis")
     .attr("transform", "translate(0, " + chartHeight + ")")
     .call(xAxis);
 
+  // Add the y axis.
+  barSvg.append("g")
+    .attr("class", "axis")
+    .call(yAxis);
+
+  // Plot the data.
   barSvg.selectAll(".bar")
     .data(barData.data)
     .enter().append("rect")
