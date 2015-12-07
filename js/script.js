@@ -62,9 +62,11 @@ $(document).ready(function(){
               alert('You must have an open data set in order to add an element to it!');
           } else if (_this.attr('class') == "add active" || _this.attr('class') == "delete active" ) {
             alert(':o');
-          }
+          } else if ( _this.attr('class') == "delete active") {
 
-          else {}
+          } else {
+
+          }
           // Uses the var image defined above to append the correct information.
 
           $(this).append('<ul class="clickinfo">' + image + '</ul>');
