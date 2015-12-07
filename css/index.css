@@ -92,7 +92,7 @@ main {
 }
 
 .add {
-  color: #42a021;
+  color: #444444;
   -webkit-backface-visibility: hidden;
   /* Chrome, Safari, Opera */
   backface-visibility: hidden;
@@ -101,14 +101,18 @@ main {
   margin-right: -4px;
 }
 
-.add:hover {
-  color: #e0e0e0;
-  background-color: #42a021;
+.add.active {
+  color: #42a021;
 }
 
-.add:disabled {
-  color: #666666;
-  background: #444444;
+.add:hover {
+  color: #e0e0e0;
+  background-color: #444444;
+}
+
+.add.active:hover {
+  color: #e0e0e0;
+  background: #42a021;
 }
 
 .delete {
@@ -121,9 +125,18 @@ main {
   margin-right: -4px;
 }
 
+.delete.active {
+  color: #a0141b;
+}
+
 .delete:hover {
   color: #e0e0e0;
   background-color: #444444;
+}
+
+.delete.active:hover {
+  color: #e0e0e0;
+  background: #a0141b;
 }
 
 .options {
@@ -269,11 +282,19 @@ main {
 }
 
 .add .hoverinfo {
+  background: #444444;
+}
+
+.add.active .hoverinfo {
   background: #42a021;
 }
 
 .delete .hoverinfo {
   background: #444444;
+}
+
+.delete.active .hoverinfo {
+  background: #a0141b;
 }
 
 .options .hoverinfo {
@@ -420,8 +441,6 @@ svg.barChart {
   color: #e0e0e0;
   background: #dc1417;
 }
-
-
 
 #dialogBottom {
   z-index: 5;

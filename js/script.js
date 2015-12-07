@@ -9,8 +9,6 @@ $(document).ready(function(){
   var elementNum = 0;
   var baseChart;
 
-  $('.add').attr('disabled', 'true');
-
   onHover();
   /*
    * onHover()
@@ -56,18 +54,13 @@ $(document).ready(function(){
               '<i class="fa fa-map"></i>' +
               '</li>';
           }
-          else if (_this.attr('id') == "add") {
-            if (currentGraph == 'bar') {
-            }
-            else if (currentGraph == 'map') {
-            }
-            else {
-              alert('You must have an open data set or be creating a data set in order to add an element to it!');
-            }
-          } else {
-
+          else if (_this.attr('class') == "add" || _this.attr('class') == "delete" ) {
+              alert('You must have an open data set in order to add an element to it!');
+          } else if (_this.attr('class') == "add active" || _this.attr('class') == "delete active" ) {
+            alert(':o');
           }
-          // Uses the var image defined above to append the corect information.
+          else {}
+          // Uses the var image defined above to append the correct information.
           $(this).append('<ul class="clickinfo">' + image + '</ul>');
 
           setTimeout(function () {
@@ -190,14 +183,15 @@ $(document).ready(function(){
 
   // Uploads the fuel station map graph
   function uploadMap() {
+      activateButtons();
       bg.style.visibility = 'hidden';
       fuel_stations();
     }
 
   // Uploads the bar graph data
   function uploadBar() {
+      activateButtons();
       bg.style.visibility = 'hidden';
-      $('.add').prop('disabled', false);
       ndsu_enrollment();
   }
 
@@ -328,6 +322,11 @@ $(document).ready(function(){
     $('.elementAdd').remove();
     $('#dialogBottom').remove();
     elementNum = 0;
+  }
+
+  function activateButtons() {
+    $('.add').addClass('active');
+    $('.delete').addClass('active');
   }
 });
 
