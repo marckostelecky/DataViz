@@ -11,7 +11,7 @@ $(document).ready(function(){
   var currentGraph = null;
   var elementNum = 0;
   var baseChart;
-  var data;
+  var currentData;
 
   onHover();
   /*
@@ -188,19 +188,53 @@ $(document).ready(function(){
    * The code of the demos is in js/data-visualization-demos.js.
    */
 
-  // Uploads the fuel station map graph
+  /*
+   * Alternative Fuel Stations
+   *
+   * This is a map of the locations of alternative fuel stations in the US. The
+   * data is from data.gov and is licensed under the terms of the CC-by license.
+   *
+   * Data Source:
+   * http://catalog.data.gov/dataset/alternative-fueling-station-locations-b550c
+   */
   function uploadMap() {
-      activateButtons();
-      bg.style.visibility = 'hidden';
-      fuel_stations();
-    }
+    activateButtons();
+    bg.style.visibility = 'hidden';
 
-  // Uploads the bar graph data
+    d3.json("../data/altfuelstations.json", function(error, data) {
+      if (error) return console.error(error);
+      console.log(data);
+      currentData = data;
+      map(data);
+    });    }
+
+  /*
+   * NDSU Enrollment
+   *
+   * This shows a bar graph of the fall enrollment of NDSU each year.
+   *
+   * Data Source:
+   * https://www.ndsu.edu/data/enrollment/annual/
+   */
   function uploadBar() {
-      activateButtons();
-      bg.style.visibility = 'hidden';
-      ndsu_enrollment();
-  }
+    activateButtons();
+    bg.style.visibility = 'hidden';
+    d3.json("../data/ndsu_enrollment.json", function(error, data) {
+      if (error) return console.error(error);
+      console.log(data);
+      currentData = data;
+      bar(data);
+    });  }
+
+  /*
+   * NDSU Student Residency Demographics
+   *
+   * This shows a pie chart with the percent of where students come to NDSU from.
+   *
+   * Data Source:
+   * https://www.ndsu.edu/data/quickfacts/
+   */
+  function uploadPie() {}
 
   function barCreate() {
     currentGraph = 'bar';
@@ -238,14 +272,13 @@ $(document).ready(function(){
 
     $('.acceptButton').on({
       click: function() {
-        data = {"data": [] };
+        currentData = {"data": [] };
 
         $('.element').each(function() {
           var inputFields = $('input', $(this));
-          data.data.push( {"category": inputFields[0].value, "value": inputFields[1].value});
+          currentData.data.push( {"category": inputFields[0].value, "value": inputFields[1].value});
         });
-        console.log(data.data);
-        bar(data);
+        bar(currentData);
         removeDialog();
       }
     });
@@ -345,8 +378,21 @@ $(document).ready(function(){
 
   function deleteElement() {
     d3.selectAll(".bar")
-      .classed("active", true);
+      .classed("barActive", true);
     $('.bar').on("click", function () {
+      d3.select(this).classed("toDelete", true);
+      var elementToDelete = -1;
+      d3.selectAll('.barActive')[0].forEach(function(currentValue, index) {
+        if (currentValue.classList.contains('toDelete'))
+        {
+          elementToDelete = index;
+          return;
+        }
+      });
+      console.log(currentData);
+      currentData.data.splice(elementToDelete, 1);
+      bar(currentData);
+
     })
   }
 

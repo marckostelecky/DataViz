@@ -369,12 +369,12 @@ svg.barChart {
   fill: #4883ee;
 }
 
-.bar.active {
+.bar.barActive {
   transition: all 0.2s;
   fill: #a0141b;
 }
 
-.bar.active:hover {
+.bar.barActive:hover {
   fill: #c4141b;
 }
 .axis text {
