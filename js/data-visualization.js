@@ -111,7 +111,7 @@ function bar(barData) {
   var barWidth = chartWidth / barData.data.length;
 
   barSvg.append("g")
-    .attr("class", "xAxis")
+    .attr("class", "axis")
     .attr("transform", "translate(0, " + chartHeight + ")")
     .call(xAxis);
 
