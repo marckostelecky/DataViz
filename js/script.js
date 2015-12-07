@@ -7,6 +7,9 @@ $(document).ready(function(){
   var currentGraph = null;
   var elementNum = 0;
   var baseChart;
+
+  $('.add').attr('disabled', 'true');
+
   onHover();
   /*
    * onHover()
@@ -32,7 +35,7 @@ $(document).ready(function(){
         }, 50);
       },
       /* Click functionality for original Option Icons
-       *
+       * Appends the buttons and hover info for the buttons on the 3rd part of the navbar
        */
       click: function() {
         var _this = $(this);
@@ -63,7 +66,7 @@ $(document).ready(function(){
           } else {
 
           }
-
+          // Uses the var image defined above to append the corect information.
           $(this).append('<ul class="clickinfo">' + image + '</ul>');
 
           setTimeout(function () {
@@ -72,9 +75,11 @@ $(document).ready(function(){
           }, 50);
 
           /*
-           * Code for the Create button
+           * UI Code for the Create menu buttons
+           * HAs hover and click interactions for the Create New Graph buttons
            */
           $(".create li").on({
+            // code that executes on hover
             mouseenter: function () {
               var title = $(this).attr('data-title');
               var _this = $(this);
@@ -84,7 +89,7 @@ $(document).ready(function(){
                 _this.find(".hoverinfo2").addClass("active");
               }, 50);
             },
-
+            // When the buttons are clicked they open a dialogBox for their respective graph avoiding duplicates
             click: function () {
               var title = $(this).attr('data-title');
               if (title == "New Bar Graph") {
@@ -110,7 +115,7 @@ $(document).ready(function(){
                 }
               }
             },
-
+            // Removes the div when the mouse leaves the element
             mouseleave: function () {
               var hover = $(this).find(".hoverinfo2");
               hover.removeClass("active");
@@ -121,7 +126,7 @@ $(document).ready(function(){
           });
 
           /*
-           * Code for the Create button
+           * Code for the Upload menu buttons
            */
           $(".upload li").on({
             mouseenter: function () {
@@ -191,9 +196,16 @@ $(document).ready(function(){
   // Uploads the bar graph data
   function uploadBar() {
       bg.style.visibility = 'hidden';
+      $('.add').prop('disabled', false);
       ndsu_enrollment();
   }
 
+  /*
+   * Create Bar Graph
+   *
+   * Creates a dialogBox that allows you to set parameters that will create a bar graph
+   * Uses a JSON object that holds the data entered into the text fields.
+   */
   function barCreate() {
     currentGraph = 'bar';
     baseCase = {"data": [
@@ -202,7 +214,7 @@ $(document).ready(function(){
       {"category": "2", "value": 0}
     ]
     };
-
+    // Creates a dialogBox for setting up a bar graph
     $('.dialogBox').append('<div id="dialogImage">' + '<div class="addButton"><i class="fa fa-plus"></i></div>' +
     '<div class="deleteButton"><i class="fa fa-minus"></i></div>' +
     '<i class="fa fa-bar-chart"></i>' + 'New Bar Graph' +
@@ -228,6 +240,10 @@ $(document).ready(function(){
       }
     });
 
+    /*
+    * mapCreate() - Creates a Map Graph
+    * Same idea as barCreate(), only it creates a map graph instead
+    */
   }
   function mapCreate() {
     currentGraph = 'map';
@@ -268,15 +284,17 @@ $(document).ready(function(){
     //bg.style.visibility = 'hidden';
   }
 
+  // adds a new element to the json object
   function newElement() {
     baseCase.data.push({"category": "3", "value": 0});
     refreshElement();
   }
-
+  // removes the last element of a json object
   function removeElement() {
     baseCase.data.pop();
     refreshElement();
   }
+  // refreshes the json object on so that the screen shows the current data in the dialogBox windows
   function refreshElement() {
     //$('.elementAdd').append('<div class="element">' + elementNum + '</div>')
    // $('.element').attr("id", elementNum);
@@ -303,6 +321,7 @@ $(document).ready(function(){
     elementNum++;
   }
 
+  // removes currently showing dialogBox
   function removeDialog() {
     $('#dialogImage').remove();
     $('.elementAdd').remove();

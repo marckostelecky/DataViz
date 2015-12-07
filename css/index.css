@@ -92,7 +92,7 @@ main {
 }
 
 .add {
-  color: #444444;
+  color: #42a021;
   -webkit-backface-visibility: hidden;
   /* Chrome, Safari, Opera */
   backface-visibility: hidden;
@@ -103,7 +103,12 @@ main {
 
 .add:hover {
   color: #e0e0e0;
-  background-color: #444444;
+  background-color: #42a021;
+}
+
+.add:disabled {
+  color: #666666;
+  background: #444444;
 }
 
 .delete {
@@ -264,7 +269,7 @@ main {
 }
 
 .add .hoverinfo {
-  background: #444444;
+  background: #42a021;
 }
 
 .delete .hoverinfo {
@@ -334,7 +339,12 @@ svg.barChart {
 }
 
 .bar {
+  transition: all 0.2s;
 	fill: #2e59a0;
+}
+
+.bar:hover {
+  fill: #4883ee;
 }
 
 .dialogBox{
@@ -453,3 +463,4 @@ svg.barChart {
 .element .keyboard {
   color: #222222;
 }
+
