@@ -16,9 +16,12 @@
  * http://catalog.data.gov/dataset/alternative-fueling-station-locations-b550c
  */
 function fuel_stations() {
-	// First, display the map.
-	map("../data/altfuelstations.json");
+  d3.json("../data/altfuelstations.json", function(error, data) {
+		if (error) return console.error(error);
+		console.log(data);
 
+		map(data);
+	});
 }
 
 /*
@@ -30,7 +33,12 @@ function fuel_stations() {
  * https://www.ndsu.edu/data/enrollment/annual/
  */
 function ndsu_enrollment() {
-	bar("../data/ndsu_enrollment.json");
+	d3.json("../data/ndsu_enrollment.json", function(error, data) {
+		if (error) return console.error(error);
+		console.log(data);
+
+		bar(data);
+	});
 }
 
 /*

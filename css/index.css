@@ -427,7 +427,7 @@ svg.barChart {
   background:#a0141b;
 }
 
-.close-button {
+.closeButton {
   transition: .2s;
   float: right;
   margin-top: -15px;
@@ -437,7 +437,7 @@ svg.barChart {
   background: #224276;
 }
 
-.close-button:hover {
+.closeButton:hover {
   color: #e0e0e0;
   background: #dc1417;
 }
