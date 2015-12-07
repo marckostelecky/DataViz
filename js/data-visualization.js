@@ -79,7 +79,7 @@ function map(data) {
 			map_svg = d3.select(".map");
 			map_svg.append("path")
 				.datum(topojson.feature(data,
-							data.objects.altfuelstations))
+							data.objects.dataPoints))
 				.attr("d", projection_path)
 				.attr("class", "data-point");
 		});
