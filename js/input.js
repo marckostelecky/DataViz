@@ -9,7 +9,7 @@
 $(document).ready(function() {
 	var myKeyboard = $('.keyboard').keyboard({
 		usePreview: false,
-		alwaysOpen: true,
+		alwaysOpen: false,
 		autoAccept: true,
 		position: {
 			my: 'center top',
