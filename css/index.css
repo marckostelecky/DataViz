@@ -3,7 +3,7 @@ body {
 }
 
 main {
-	margin: 50px 0 0 0;
+  margin: 50px 0 0 0;
 }
 
 .navbar-brand.darkbar {
@@ -62,9 +62,9 @@ main {
   /* -webkit-backface-visibility: hidden; */
   /* Chrome, Safari, Opera */
   backface-visibility: hidden;
- /* background-color: #1414a0; */
+  /* background-color: #1414a0; */
   margin-right: -5px;
- }
+}
 
 .create:hover {
   color: #e0e0e0;
@@ -96,7 +96,7 @@ main {
   -webkit-backface-visibility: hidden;
   /* Chrome, Safari, Opera */
   backface-visibility: hidden;
- /* background-color: #42a021; */
+  /* background-color: #42a021; */
   white-space: nowrap;
   margin-right: -4px;
 }
@@ -120,7 +120,7 @@ main {
   -webkit-backface-visibility: hidden;
   /* Chrome, Safari, Opera */
   backface-visibility: hidden;
- /* background-color: #a0141b; */
+  /* background-color: #a0141b; */
   white-space: nowrap;
   margin-right: -4px;
 }
@@ -338,22 +338,22 @@ main {
 }
 
 svg.map {
-	fill: #ccc;
+  fill: #ccc;
 }
 
 svg.map .state-boundary {
- 	fill: none;
- 	stroke: #555;
- 	stroke-dasharray: 2,2;
- 	stroke-linejoin: round;
+  fill: none;
+  stroke: #555;
+  stroke-dasharray: 2,2;
+  stroke-linejoin: round;
 }
 
 svg.map .place {
-	fill: #666;
+  fill: #666;
 }
 
 svg.map .data-point {
-	fill: black;
+  fill: black;
 }
 
 svg.barChart {
@@ -362,7 +362,7 @@ svg.barChart {
 
 .bar {
   transition: all 0.2s;
-	fill: #2e59a0;
+  fill: #2e59a0;
 }
 
 .bar:hover {
@@ -397,20 +397,28 @@ svg.barChart {
   color: #e0e0e0;
 }
 
+.dialogBoxSmall{
+  position: absolute;
+  top: 15%;
+  left: 30%;
+  height: 200px;
+  color: #e0e0e0;
+}
+
 .dialogBox i {
   text-align: center;
 }
- #dialogImage {
-   text-align: center;
-   padding-top: 15px;
-   padding-bottom: 15px;
-   background: #224276;
-   z-index: 5;
- }
+#dialogImage {
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background: #224276;
+  z-index: 5;
+}
 
- #dialogImage i.fa.fa-map {
-   padding-right: 10px;
- }
+#dialogImage i.fa.fa-map {
+  padding-right: 10px;
+}
 
 #dialogImage i.fa.fa-bar-chart {
   padding-right: 10px;
@@ -482,6 +490,14 @@ svg.barChart {
 
 .elementAdd {
   height: 500px;
+  width: 500px;
+  color: #e0e0e0;
+  background: #2e59a0;
+  overflow-y: auto;
+}
+
+.elementAddSmall {
+  height: 100px;
   width: 500px;
   color: #e0e0e0;
   background: #2e59a0;

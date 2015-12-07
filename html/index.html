@@ -1,72 +1,73 @@
 <!DOCTYPE html>
 <html>
-	<head lang="en">
-		<meta charset="UTF-8">
-		<title>Data Visualization</title>
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300,800' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="../css/index.css">
-		<!-- Dependencies -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-		<script src="../js/bootstrap.min.js"></script>
-		<script src="../js/tests/vendor/tether.min.js"></script>
-		<script src="../js/d3.v3.min.js" charset="utf-8"></script>
-		<script src="../js/topojson.v1.min.js"></script>
-		<!-- Keyboard widget css & script -->
-		<link href="../css/keyboard.min.css" rel="stylesheet">
-		<script src="../js/jquery.keyboard.min.js"></script>
-		<!-- Our scripts -->
-		<script src="../js/script.js"></script>
-		<script src="../js/input.js"></script>
-		<script src="../js/data-visualization.js"></script>
-		<script src="../js/data-visualization-demos.js"></script>
-	</head>
-	<body>
-		<!-- Div that contains the navbar on the top of the screen. -->
-		<div id="container">
-			<nav class="navbar navbar-fixed-top" role="navigation">
-				<div class="container-fluid">
-					<!-- Brand and toggle get grouped for better mobile display. -->
-					<div class="navbar-header">
-						<a class="navbar-brand darkbar" href="index.html"><i class="fa fa-cube"></i><span class="logoText">DataViz</span></a>
-						<div class="col-md-3 col-md-offset-1">
-							<!-- <div class="bufferSpace"></div> -->
-							<ul class="nav navbar-nav navbar-left option-icons">
-								<li class="create" data-title="Create New Data Set" id="create">
-									<i class="fa fa-file"></i>
-								</li>
-								<li class="upload" data-title="Upload Data Set" id="upload">
-									<i class="fa fa-upload"></i>
-								</li>
-								<li class="add" data-title="Add Element" id="add">
-									<i class="fa fa-plus"></i>
-								</li>
-								<li class="delete" data-title="Delete Element" id="delete">
-									<i class="fa fa-minus"></i>
-								</li>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Data Visualization</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300,800' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/index.css">
+  <!-- Dependencies -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/tests/vendor/tether.min.js"></script>
+  <script src="../js/d3.v3.min.js" charset="utf-8"></script>
+  <script src="../js/topojson.v1.min.js"></script>
+  <!-- Keyboard widget css & script -->
+  <link href="../css/keyboard.min.css" rel="stylesheet">
+  <script src="../js/jquery.keyboard.min.js"></script>
+  <!-- Our scripts -->
+  <script src="../js/script.js"></script>
+  <script src="../js/input.js"></script>
+  <script src="../js/data-visualization.js"></script>
+  <script src="../js/data-visualization-demos.js"></script>
+</head>
+<body>
+<!-- Div that contains the navbar on the top of the screen. -->
+<div id="container">
+  <nav class="navbar navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display. -->
+      <div class="navbar-header">
+        <a class="navbar-brand darkbar" href="index.html"><i class="fa fa-cube"></i><span class="logoText">DataViz</span></a>
+        <div class="col-md-3 col-md-offset-1">
+          <!-- <div class="bufferSpace"></div> -->
+          <ul class="nav navbar-nav navbar-left option-icons">
+            <li class="create" data-title="Create New Data Set" id="create">
+              <i class="fa fa-file"></i>
+            </li>
+            <li class="upload" data-title="Upload Data Set" id="upload">
+              <i class="fa fa-upload"></i>
+            </li>
+            <li class="add" data-title="Add Element" id="add">
+              <i class="fa fa-plus"></i>
+            </li>
+            <li class="delete" data-title="Delete Element" id="delete">
+              <i class="fa fa-minus"></i>
+            </li>
 
-							</ul>
-            </div>
-              <ul class="nav navbar-nav navbar-right option-icons">
-                <li class="options" data-title="Options">
-                  <i class="fa fa-gear"></i>
-                </li>
-              </ul>
+          </ul>
+        </div>
+        <ul class="nav navbar-nav navbar-right option-icons">
+          <li class="options" data-title="Options">
+            <i class="fa fa-gear"></i>
+          </li>
+        </ul>
 
-					</div>
-				</div>
+      </div>
+    </div>
 
-			</nav>
-      <div class="dialogBox"></div>
-		</div>
+  </nav>
+  <div class="dialogBox"></div>
+  <div class="dialogBoxSmall"></div>
+</div>
 
-		<!-- Main content goes here. -->
-		<main>
+<!-- Main content goes here. -->
+<main>
 
-		</main>
-	  <div class="background-body" id="background"><i class="fa fa-cube big-icon"></i></div>
-	</body>
+</main>
+<div class="background-body" id="background"><i class="fa fa-cube big-icon"></i></div>
+</body>
 </html>

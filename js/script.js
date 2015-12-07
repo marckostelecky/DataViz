@@ -32,8 +32,11 @@ $(document).ready(function(){
       mouseenter: function () {
         var title = $(this).attr('data-title');
         var _this = $(this);
-        $(this).append('<div class="hoverinfo">' + title + '</div>');
+        if ($(this).attr('class') == "add" || $(this).attr('class') == "delete") {
 
+        } else {
+          $(this).append('<div class="hoverinfo">' + title + '</div>');
+        }
         setTimeout(function () {
           _this.find(".hoverinfo").addClass("active");
         }, 50);
@@ -60,11 +63,13 @@ $(document).ready(function(){
               '</li>';
           }
           else if (_this.attr('class') == "add" || _this.attr('class') == "delete" ) {
-              alert('You must have an open data set in order to manipulate an element in it!');
+
           } else if (_this.attr('class') == "add active") {
-            addElement();
+            _this.removeClass("active");
+            $('.delete').removeClass("active");
+            insertDataPoint();
           } else if ( _this.attr('class') == "delete active") {
-            deleteElement();
+            deleteDataPoint();
           } else {
 
           }
@@ -197,6 +202,7 @@ $(document).ready(function(){
    * https://www.ndsu.edu/data/enrollment/annual/
    */
   function uploadBar() {
+    currentGraph = "bar";
     activateButtons();
     bg.style.visibility = 'hidden';
     d3.json("../data/ndsu_enrollment.json", function(error, data) {
@@ -216,6 +222,7 @@ $(document).ready(function(){
    * http://catalog.data.gov/dataset/alternative-fueling-station-locations-b550c
    */
   function uploadMap() {
+    currentGraph = "map";
     activateButtons();
     bg.style.visibility = 'hidden';
 
@@ -254,11 +261,11 @@ $(document).ready(function(){
     };
 
     $('.dialogBox').append('<div id="dialogImage">' + '<div class="addButton"><i class="fa fa-plus"></i></div>' +
-        '<div class="deleteButton"><i class="fa fa-minus"></i></div>' +
-        '<i class="fa fa-bar-chart"></i>' + 'New Bar Graph' +
-        '<div class="closeButton"><i class="fa fa-times"></i></div>' +
-        '</div>' + '<div class="elementAdd"></div>' +
-        '<div id="dialogBottom" class="acceptButton">Create!</div>');
+    '<div class="deleteButton"><i class="fa fa-minus"></i></div>' +
+    '<i class="fa fa-bar-chart"></i>' + 'New Bar Graph' +
+    '<div class="closeButton"><i class="fa fa-times"></i></div>' +
+    '</div>' + '<div class="elementAdd"></div>' +
+    '<div id="dialogBottom" class="acceptButton">Create!</div>');
 
     $('.addButton').on({
       click: function() {
@@ -304,12 +311,12 @@ $(document).ready(function(){
     };
 
     $('.dialogBox').append('<div id="dialogImage">' +
-        '<div class="addButton"><i class="fa fa-plus"></i></div>' +
-        '<div class="deleteButton"><i class="fa fa-minus"></i></div>' +
-        '<i class="fa fa-map"></i>' + 'New Map Graph' +
-        '<div class="closeButton"><i class="fa fa-times"></i></div>' +
-        '</div>' + '<div class="elementAdd"></div>' +
-        '<div id="dialogBottom" class="acceptButton">Create!</div>');
+    '<div class="addButton"><i class="fa fa-plus"></i></div>' +
+    '<div class="deleteButton"><i class="fa fa-minus"></i></div>' +
+    '<i class="fa fa-map"></i>' + 'New Map Graph' +
+    '<div class="closeButton"><i class="fa fa-times"></i></div>' +
+    '</div>' + '<div class="elementAdd"></div>' +
+    '<div id="dialogBottom" class="acceptButton">Create!</div>');
 
     $('.addButton').on({
       click: function () {
@@ -384,6 +391,7 @@ $(document).ready(function(){
   function removeDialog() {
     $('#dialogImage').remove();
     $('.elementAdd').remove();
+    $('.elementAddSmall').remove();
     $('#dialogBottom').remove();
     elementNum = 0;
   }
@@ -395,7 +403,7 @@ $(document).ready(function(){
     $('.delete').addClass('active');
   }
 
-  function deleteElement() {
+  function deleteDataPoint() {
     d3.selectAll(".bar")
       .classed("barActive", true);
     $('.bar').on("click", function () {
@@ -415,7 +423,33 @@ $(document).ready(function(){
     })
   }
 
-  function addElement() {
+  function insertDataPoint() {
+    $('.dialogBoxSmall').append('<div id="dialogImage">' +
+    '<i class="fa fa-bar-chart"></i>' + 'Add Bar Graph Element' +
+    '<div class="closeButton"><i class="fa fa-times"></i></div>' +
+    '</div>' + '<div class="elementAddSmall"></div>' +
+    '<div id="dialogBottom" class="acceptButton">Add!</div>');
 
+    $('.closeButton').on({
+      click: function () {
+        removeDialog();
+      }
+    });
+
+    if (currentGraph == 'bar') {
+      $('.elementAddSmall').append('<span id="title">Title</span>' + '<input type="text" class="keyboard" placeholder="Type Something Here!"/>' + '<span id="title">Value</span>' + '<input type="text" class="keyboard" placeholder="Type Something Here!"/>');
+    } else if (currentGraph == "map") {
+      $(this).append('<span id="title">Long</span>' + '<input type="text" class="keyboard" placeholder="' + baseCase.data[i].category + '"/>' + '<span id="title">Lat</span>' + '<input type="text" class="keyboard" placeholder="' + baseCase.data[i].value + '"/>');
+    }
+
+    $('.acceptButton').on({
+      click: function() {
+        var inputFields = $('input', '.elementAddSmall');
+        currentData.data.push( {"category": inputFields[0].value, "value": inputFields[1].value});
+
+        bar(currentData);
+        removeDialog();
+      }
+    })
   }
 });
