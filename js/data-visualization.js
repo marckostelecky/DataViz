@@ -62,24 +62,17 @@ function map(data) {
   });
 
   // Add the user's data to the map.
-  if (data != null) {
-    d3.json(data, function(error, data) {
-      if (error) return console.error(error);
-      console.log(data);
+  // Generate the svg path from the data.
+  var projection_path = d3.geo.path().projection(projection);
+  projection_path.pointRadius(1);
 
-      // Generate the svg path from the data.
-      var projection_path = d3.geo.path().projection(projection);
-      projection_path.pointRadius(1);
-
-      // Add the data to the map.
-      map_svg = d3.select(".map");
-      map_svg.append("path")
-        .datum(topojson.feature(data,
-              data.objects.dataPoints))
-        .attr("d", projection_path)
-        .attr("class", "data-point");
-    });
-  }
+  // Add the data to the map.
+  map_svg = d3.select(".map");
+  map_svg.append("path")
+    .datum(topojson.feature(data,
+          data.objects.dataPoints))
+    .attr("d", projection_path)
+    .attr("class", "data-point");
 }
 
 /*
@@ -96,7 +89,7 @@ function bar(barData) {
     .style("padding", "100px 100px 100px 100px")
     .attr("class", "barChart");
 
-  // Set the dimentions of the bar chart.
+  // Set the dimentions and attributes of the bar chart.
   var chartWidth = 800;
   var chartHeight = 600;
 
@@ -112,27 +105,22 @@ function bar(barData) {
     .scale(y)
     .orient("left");
 
-  // Load the data that goes in the chart.
-  d3.json(barData, function(error, barData) {
-    if (error) return console.error(error);
-    console.log(barData);
+  // Plot the data.
+  x.domain(barData.data.map(function(d) { return d.category; }));
+  y.domain([0, d3.max(barData.data, function(d) { return d.value; } )]);
+  var barWidth = chartWidth / barData.data.length;
 
-    x.domain(barData.data.map(function(d) { return d.category; }));
-    y.domain([0, d3.max(barData.data, function(d) { return d.value; } )]);
-    var barWidth = chartWidth / barData.data.length;
+  barSvg.append("g")
+    .attr("class", "xAxis")
+    .attr("transform", "translate(0, " + chartHeight + ")")
+    .call(xAxis);
 
-    barSvg.append("g")
-      .attr("class", "xAxis")
-      .attr("transform", "translate(0, " + chartHeight + ")")
-      .call(xAxis);
-
-    barSvg.selectAll(".bar")
-      .data(barData.data)
-      .enter().append("rect")
-      .attr("class", "bar")
-      .attr("x", function(d) { return x(d.category); })
-      .attr("y", function(d) { return y(d.value); })
-      .attr("height", function(d) { return chartHeight - y(d.value); })
-      .attr("width", x.rangeBand());
-  });
+  barSvg.selectAll(".bar")
+    .data(barData.data)
+    .enter().append("rect")
+    .attr("class", "bar")
+    .attr("x", function(d) { return x(d.category); })
+    .attr("y", function(d) { return y(d.value); })
+    .attr("height", function(d) { return chartHeight - y(d.value); })
+    .attr("width", x.rangeBand());
 }

@@ -1,16 +1,16 @@
-/**
- * Created by Squeelch on 11/27/2015.
+/*
+ * script.js
+ * Authors: Marc Kostelecky, Jordan Christiansen
+ *
+ * This file contains JavaScript for our UI and other functions to connect the
+ * html frontend to the d3 data visualization backend.
  */
 $(document).ready(function(){
-
   var uploadVisible = false;
   var bg = document.getElementById("background");
   var currentGraph = null;
   var elementNum = 0;
   var baseChart;
-
-  $('.add').attr('disabled', 'true');
-
   onHover();
   /*
    * onHover()
@@ -20,11 +20,12 @@ $(document).ready(function(){
   function onHover() {
     var clicked = false;
 
-    /* Interaction functionality when using the buttons on the navbar
-     *  mouseenter appends a hoverinfo css
-     *  click is what happens when you click
-     *  mouseleave will remove the appended elements
-     * */
+    /*
+     * Interaction functionality when using the buttons on the navbar
+     * mouseenter appends a hoverinfo css
+     * click is what happens when you click
+     * mouseleave will remove the appended elements
+     */
     $(".option-icons li").on({
       mouseenter: function () {
         var title = $(this).attr('data-title');
@@ -35,8 +36,8 @@ $(document).ready(function(){
           _this.find(".hoverinfo").addClass("active");
         }, 50);
       },
-      /* Click functionality for original Option Icons
-       * Appends the buttons and hover info for the buttons on the 3rd part of the navbar
+      /*
+       * Click functionality for original Option Icons
        */
       click: function() {
         var _this = $(this);
@@ -67,7 +68,7 @@ $(document).ready(function(){
           } else {
 
           }
-          // Uses the var image defined above to append the corect information.
+
           $(this).append('<ul class="clickinfo">' + image + '</ul>');
 
           setTimeout(function () {
@@ -76,11 +77,9 @@ $(document).ready(function(){
           }, 50);
 
           /*
-           * UI Code for the Create menu buttons
-           * HAs hover and click interactions for the Create New Graph buttons
+           * Code for the Create button
            */
           $(".create li").on({
-            // code that executes on hover
             mouseenter: function () {
               var title = $(this).attr('data-title');
               var _this = $(this);
@@ -90,7 +89,7 @@ $(document).ready(function(){
                 _this.find(".hoverinfo2").addClass("active");
               }, 50);
             },
-            // When the buttons are clicked they open a dialogBox for their respective graph avoiding duplicates
+
             click: function () {
               var title = $(this).attr('data-title');
               if (title == "New Bar Graph") {
@@ -103,7 +102,7 @@ $(document).ready(function(){
                   barCreate();
                   newElement();
                 }
-            }
+              }
               else if (title == "New Map Graph") {
                 if ($('.elementAdd').length == 0) {
                   mapCreate();
@@ -116,7 +115,7 @@ $(document).ready(function(){
                 }
               }
             },
-            // Removes the div when the mouse leaves the element
+
             mouseleave: function () {
               var hover = $(this).find(".hoverinfo2");
               hover.removeClass("active");
@@ -127,7 +126,7 @@ $(document).ready(function(){
           });
 
           /*
-           * Code for the Upload menu buttons
+           * Code for the upload button
            */
           $(".upload li").on({
             mouseenter: function () {
@@ -141,16 +140,16 @@ $(document).ready(function(){
             },
 
 
-        click: function () {
-          var title = $(this).attr('data-title');
-          if (title == "Upload Bar Graph") {
-            uploadBar();
-          }
-          else if (title == "Upload Map Graph") {
-            bg.style.visibility = 'hidden';
-            uploadMap();
-          }
-        },
+            click: function () {
+              var title = $(this).attr('data-title');
+              if (title == "Upload Bar Graph") {
+                uploadBar();
+              }
+              else if (title == "Upload Map Graph") {
+                bg.style.visibility = 'hidden';
+                uploadMap();
+              }
+            },
 
             mouseleave: function () {
               var hover = $(this).find(".hoverinfo2");
@@ -190,23 +189,16 @@ $(document).ready(function(){
 
   // Uploads the fuel station map graph
   function uploadMap() {
-      bg.style.visibility = 'hidden';
-      fuel_stations();
-    }
+    bg.style.visibility = 'hidden';
+    fuel_stations();
+  }
 
   // Uploads the bar graph data
   function uploadBar() {
-      bg.style.visibility = 'hidden';
-      $('.add').prop('disabled', false);
-      ndsu_enrollment();
+    bg.style.visibility = 'hidden';
+    ndsu_enrollment();
   }
 
-  /*
-   * Create Bar Graph
-   *
-   * Creates a dialogBox that allows you to set parameters that will create a bar graph
-   * Uses a JSON object that holds the data entered into the text fields.
-   */
   function barCreate() {
     currentGraph = 'bar';
     baseCase = {"data": [
@@ -215,36 +207,45 @@ $(document).ready(function(){
       {"category": "2", "value": 0}
     ]
     };
-    // Creates a dialogBox for setting up a bar graph
+
     $('.dialogBox').append('<div id="dialogImage">' + '<div class="addButton"><i class="fa fa-plus"></i></div>' +
-    '<div class="deleteButton"><i class="fa fa-minus"></i></div>' +
-    '<i class="fa fa-bar-chart"></i>' + 'New Bar Graph' +
-    '<div class="close-button"><i class="fa fa-times"></i></div>' +
-    '</div>' + '<div class="elementAdd"></div>' +
-    '<div id="dialogBottom">Create!</div>');
+        '<div class="deleteButton"><i class="fa fa-minus"></i></div>' +
+        '<i class="fa fa-bar-chart"></i>' + 'New Bar Graph' +
+        '<div class="closeButton"><i class="fa fa-times"></i></div>' +
+        '</div>' + '<div class="elementAdd"></div>' +
+        '<div id="dialogBottom" class="acceptButton">Create!</div>');
 
     $('.addButton').on({
-      click: function () {
+      click: function() {
         newElement();
       }
     });
 
     $('.deleteButton').on({
-      click: function () {
+      click: function() {
         removeElement();
       }
     });
 
-    $('.close-button').on({
-      click: function () {
+    $('.closeButton').on({
+      click: function() {
         removeDialog();
       }
     });
 
-    /*
-    * mapCreate() - Creates a Map Graph
-    * Same idea as barCreate(), only it creates a map graph instead
-    */
+    $('.acceptButton').on({
+      click: function() {
+        data = {"data": [] };
+
+        $('.element').each(function() {
+          var inputFields = $('input', $(this));
+          data.data.push( {"category": inputFields[0].value, "value": inputFields[1].value});
+        });
+        console.log(data.data);
+        bar(data);
+      }
+    });
+
   }
   function mapCreate() {
     currentGraph = 'map';
@@ -256,12 +257,12 @@ $(document).ready(function(){
     };
 
     $('.dialogBox').append('<div id="dialogImage">' +
-    '<div class="addButton"><i class="fa fa-plus"></i></div>' +
-    '<div class="deleteButton"><i class="fa fa-minus"></i></div>' +
-    '<i class="fa fa-map"></i>' + 'New Map Graph' +
-    '<div class="close-button"><i class="fa fa-times"></i></div>' +
-    '</div>' + '<div class="elementAdd"></div>' +
-    '<div id="dialogBottom">Create!</div>');
+        '<div class="addButton"><i class="fa fa-plus"></i></div>' +
+        '<div class="deleteButton"><i class="fa fa-minus"></i></div>' +
+        '<i class="fa fa-map"></i>' + 'New Map Graph' +
+        '<div class="close-button"><i class="fa fa-times"></i></div>' +
+        '</div>' + '<div class="elementAdd"></div>' +
+        '<div id="dialogBottom" class="acceptButton">Create!</div>');
 
     $('.addButton').on({
       click: function () {
@@ -281,24 +282,28 @@ $(document).ready(function(){
       }
     });
 
+    $('.acceptButton').on({
+      click: function() {
+        map(baseCase);
+      }
+    });
+
     //map();
     //bg.style.visibility = 'hidden';
   }
 
-  // adds a new element to the json object
   function newElement() {
     baseCase.data.push({"category": "3", "value": 0});
     refreshElement();
   }
-  // removes the last element of a json object
+
   function removeElement() {
     baseCase.data.pop();
     refreshElement();
   }
-  // refreshes the json object on so that the screen shows the current data in the dialogBox windows
   function refreshElement() {
     //$('.elementAdd').append('<div class="element">' + elementNum + '</div>')
-   // $('.element').attr("id", elementNum);
+    // $('.element').attr("id", elementNum);
 
     d3.selectAll('.element').remove();
 
@@ -322,7 +327,6 @@ $(document).ready(function(){
     elementNum++;
   }
 
-  // removes currently showing dialogBox
   function removeDialog() {
     $('#dialogImage').remove();
     $('.elementAdd').remove();
@@ -330,5 +334,3 @@ $(document).ready(function(){
     elementNum = 0;
   }
 });
-
-
