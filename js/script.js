@@ -120,11 +120,11 @@ $(document).ready(function(){
         click: function () {
           var title = $(this).attr('data-title');
           if (title == "Upload Bar Graph") {
-            // bar();
+            uploadBar();
           }
           else if (title == "Upload Map Graph") {
             bg.style.visibility = 'hidden';
-            upload();
+            uploadMap();
           }
         },
 
@@ -155,16 +155,26 @@ $(document).ready(function(){
   }
 
   /*
-   * upload()
+   * Upload Data Sets
    *
-   * Opens the Fuel Station Map Graph
+   * This would allow the user to upload the dataset of his or her choosing to
+   * the web application, but in our prototype it imports predefined demo
+   * datasets.
+   *
+   * The code of the demos is in js/data-visualization-demos.js.
    */
-  function upload() {
-    if (uploadVisible == false){
-      uploadVisible = true;
+
+  // Uploads the fuel station map graph
+  function uploadMap() {
       bg.style.visibility = 'hidden';
       fuel_stations();
-    }}
+    }
+
+  // Uploads the bar graph data
+  function uploadBar() {
+      bg.style.visibility = 'hidden';
+      ndsu_enrollment();
+  }
 
   function mapCreate() {
 
