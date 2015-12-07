@@ -311,23 +311,30 @@ main {
   font-size: 400px;
 }
 
-.map {
+svg.map {
 	fill: #ccc;
 }
 
-.state-boundary {
+svg.map .state-boundary {
  	fill: none;
  	stroke: #555;
  	stroke-dasharray: 2,2;
  	stroke-linejoin: round;
 }
 
-.place {
+svg.map .place {
 	fill: #666;
 }
 
-.data-point {
+svg.map .data-point {
 	fill: black;
+}
+
+svg.barChart {
+}
+
+.bar {
+	fill: #2e59a0;
 }
 
 .dialogBox{

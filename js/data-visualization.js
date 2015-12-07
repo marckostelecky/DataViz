@@ -28,17 +28,18 @@ function map(data) {
 		.attr("height", height)
 		.attr("class", "map");
 
+	// Choose a projection for the map data.
+	var projection = d3.geo.albers()
+		.center([0, 35])
+		.rotate([100, 0])
+		.parallels([25, 50])
+		.translate([width / 2, height / 2]);
+
 	// First, make the background map.
 	d3.json("../data/us.json", function(error, us) {
 		if (error) return console.error(error);
 		console.log(us);
 
-		// Choose a projection for the map data.
-		var projection = d3.geo.albers()
-			.center([0, 35])
-			.rotate([100, 0])
-			.parallels([25, 50])
-			.translate([width / 2, height / 2]);
 		// Generate the svg path from the data.
 		var projection_path = d3.geo.path().projection(projection);
 		projection_path.pointRadius(1);
@@ -65,12 +66,7 @@ function map(data) {
 		d3.json(data, function(error, data) {
 			if (error) return console.error(error);
 			console.log(data);
-			// Choose a projection for the map data.
-			var projection = d3.geo.albers()
-				.center([0, 35])
-				.rotate([100, 0])
-				.parallels([25, 50])
-				.translate([width / 2, height / 2]);
+
 			// Generate the svg path from the data.
 			var projection_path = d3.geo.path().projection(projection);
 			projection_path.pointRadius(1);
@@ -89,43 +85,54 @@ function map(data) {
 /*
  * Make a bar graph.
  */
-function bar(data) {
+function bar(barData) {
 	// Delete the old visualization, if there is one.
 	d3.select("main svg").remove();
 
 	// Create the svg element where we will create the bar graph.
-	var bar_svg = d3.select("main").append("svg")
+	var barSvg = d3.select("main").append("svg")
 		.attr("width", width)
 		.attr("height", height)
-		.attr("class", "bar-chart");
+		.style("padding", "100px 100px 100px 100px")
+		.attr("class", "barChart");
 
-	var x = d3.scale.linear()
-		.range([0, width]);
+	// Set the dimentions of the bar chart.
+	var chartWidth = 800;
+	var chartHeight = 600;
 
-	var barHeight = 20
+	var x = d3.scale.ordinal()
+		.rangeRoundBands([0, chartWidth], .1);
+	var y = d3.scale.linear()
+		.range([chartHeight/2, 0]);
 
-	d3.json(data, function(error, data) {
+	var xAxis = d3.svg.axis()
+		.scale(x)
+		.orient("bottom");
+	var yAxis = d3.svg.axis()
+		.scale(y)
+		.orient("left");
+
+	// Load the data that goes in the chart.
+	d3.json(barData, function(error, barData) {
 		if (error) return console.error(error);
-		console.log(data);
+		console.log(barData);
 
-		x.domain([0, d3.max(data.data, function(d) { return d.value; } )]);
-		bar_svg.attr("height", barHeight * data.length);
-		
-		var bar = bar_svg.selectAll("g")
-			.data(data.data)
-			.enter().append("g")
-			.attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
+		x.domain(barData.data.map(function(d) { return d.category; }));
+		y.domain([0, d3.max(barData.data, function(d) { return d.value; } )]);
+		var barWidth = chartWidth / barData.data.length;
 
-		bar.append("rect")
-			.attr("width", function(d) { return x(d.value); })
-			.attr("height", barHeight - 1)
-			.style("fill", "blue");
+		barSvg.append("g")
+			.attr("class", "xAxis")
+			.attr("transform", "translate(0, " + chartHeight + ")")
+			.call(xAxis);
 
-		bar.append("text")
-			.attr("x", function(d) { return x(d.value) - 3; })
-			.attr("y", barHeight / 2)
-			.attr("dy", ".35em")
-			.text(function(d) { return d.category; });
-
+		barSvg.selectAll(".bar")
+			.data(barData.data)
+			.enter().append("rect")
+			.attr("class", "bar")
+			.attr("x", function(d) { return x(d.category); })
+			.attr("y", function(d) { return y(d.value); })
+			.attr("height", function(d) { return chartHeight - y(d.value); })
+			.attr("width", x.rangeBand());
 	});
 }
