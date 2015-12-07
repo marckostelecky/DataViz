@@ -6,6 +6,7 @@ $(document).ready(function(){
   var bg = document.getElementById("background");
   var currentGraph = null;
   var elementNum = 0;
+  var baseChart;
   onHover();
   /*
    * onHover()
@@ -193,6 +194,12 @@ $(document).ready(function(){
 
   function barCreate() {
     currentGraph = 'bar';
+    baseCase = {"data": [
+      {"category": "0", "value": 0},
+      {"category": "1", "value": 0},
+      {"category": "2", "value": 0}
+    ]
+    };
 
     $('.dialogBox').append('<div id="dialogImage">' +
     '<i class="fa fa-bar-chart"></i>' + 'New Bar Graph' +
@@ -229,9 +236,22 @@ $(document).ready(function(){
   function newElement() {
     //$('.elementAdd').append('<div class="element">' + elementNum + '</div>')
    // $('.element').attr("id", elementNum);
-    d3.selectAll('.elementAdd div')
+    baseCase.data.push({"category": "3", "value": 0});
+
+    d3.selectAll('.element').remove();
+
+    d3.select('.elementAdd').selectAll('.element')
+      .data(baseCase.data)
       .enter().append('div')
-      .attr('class', '.element');
+      .attr('id', function(d, i) { return i;})
+      .attr('class', 'element');
+
+      $('.element').each(function(i, e) {
+      $(this).append('Title' +'<input type="text" class="keyboard" placeholder="'
+      + baseCase.data[i].category
+      +'"/>');
+    });
+
     elementNum++;
   }
 
