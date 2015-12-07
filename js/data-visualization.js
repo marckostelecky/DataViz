@@ -59,20 +59,20 @@ function map(data) {
       .datum(topojson.feature(us, us.objects.places))
       .attr("d", projection_path)
       .attr("class", "place");
+
+    // Add the user's data to the map.
+    // Generate the svg path from the data.
+    var projection_path = d3.geo.path().projection(projection);
+    projection_path.pointRadius(1);
+
+    // Add the data to the map.
+    map_svg = d3.select(".map");
+    map_svg.append("path")
+      .datum(topojson.feature(data,
+            data.objects.dataPoints))
+      .attr("d", projection_path)
+      .attr("class", "data-point");
   });
-
-  // Add the user's data to the map.
-  // Generate the svg path from the data.
-  var projection_path = d3.geo.path().projection(projection);
-  projection_path.pointRadius(1);
-
-  // Add the data to the map.
-  map_svg = d3.select(".map");
-  map_svg.append("path")
-    .datum(topojson.feature(data,
-          data.objects.dataPoints))
-    .attr("d", projection_path)
-    .attr("class", "data-point");
 }
 
 /*
