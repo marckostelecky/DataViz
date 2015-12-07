@@ -189,6 +189,24 @@ $(document).ready(function(){
    */
 
   /*
+   * NDSU Enrollment
+   *
+   * This shows a bar graph of the fall enrollment of NDSU each year.
+   *
+   * Data Source:
+   * https://www.ndsu.edu/data/enrollment/annual/
+   */
+  function uploadBar() {
+    activateButtons();
+    bg.style.visibility = 'hidden';
+    d3.json("../data/ndsu_enrollment.json", function(error, data) {
+      if (error) return console.error(error);
+      console.log(data);
+      currentData = data;
+      bar(data);
+    });  }
+
+  /*
    * Alternative Fuel Stations
    *
    * This is a map of the locations of alternative fuel stations in the US. The
@@ -209,24 +227,6 @@ $(document).ready(function(){
     });    }
 
   /*
-   * NDSU Enrollment
-   *
-   * This shows a bar graph of the fall enrollment of NDSU each year.
-   *
-   * Data Source:
-   * https://www.ndsu.edu/data/enrollment/annual/
-   */
-  function uploadBar() {
-    activateButtons();
-    bg.style.visibility = 'hidden';
-    d3.json("../data/ndsu_enrollment.json", function(error, data) {
-      if (error) return console.error(error);
-      console.log(data);
-      currentData = data;
-      bar(data);
-    });  }
-
-  /*
    * NDSU Student Residency Demographics
    *
    * This shows a pie chart with the percent of where students come to NDSU from.
@@ -236,6 +236,14 @@ $(document).ready(function(){
    */
   function uploadPie() {}
 
+  /*
+   * Create Data Sets
+   *
+   * These functions allow the user to specify data in a dialog box and
+   * visualize it immediately.
+   */
+
+  // Make the dialog box for creating a bar graph.
   function barCreate() {
     currentGraph = 'bar';
     baseCase = {"data": [
@@ -284,6 +292,8 @@ $(document).ready(function(){
     });
 
   }
+
+  // Make the dialog box for creating a map.
   function mapCreate() {
     currentGraph = 'map';
     baseCase = {"data": [
@@ -329,15 +339,20 @@ $(document).ready(function(){
     //bg.style.visibility = 'hidden';
   }
 
+  // newElement() adds a set of text boxes to the current create dialog box.
   function newElement() {
     baseCase.data.push({"category": "3", "value": 0});
     refreshElement();
   }
 
+  // removeElement() removes a set of text boxes to the current create dialog box.
   function removeElement() {
     baseCase.data.pop();
     refreshElement();
   }
+
+  // refreshElement() applies the effects of newElement() and removeElement(),
+  // then makes the new dialog box in html.
   function refreshElement() {
     //$('.elementAdd').append('<div class="element">' + elementNum + '</div>')
     // $('.element').attr("id", elementNum);
@@ -364,6 +379,8 @@ $(document).ready(function(){
     elementNum++;
   }
 
+  // removeDialog() removes the create dialog from the screen when the user
+  // clicks the close button or the create! button.
   function removeDialog() {
     $('#dialogImage').remove();
     $('.elementAdd').remove();
@@ -371,6 +388,8 @@ $(document).ready(function(){
     elementNum = 0;
   }
 
+  // activateButtons() re-enables the add and delete buttons after they have
+  // been disabled.
   function activateButtons() {
     $('.add').addClass('active');
     $('.delete').addClass('active');
