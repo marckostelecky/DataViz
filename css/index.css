@@ -304,6 +304,7 @@ main {
   color: gray;
   opacity: .15;
   margin: 0 auto;
+  z-index: -30;
 }
 
 .big-icon {
@@ -331,16 +332,62 @@ main {
 
 .dialogBox{
   position: absolute;
-  alignment: center;
+  top: 15%;
+  left: 30%;
+  height: 600px;
+  color: #e0e0e0;
 }
 
-.createMap {
-  top: 20%;
-  left: 20%;
-  height: 600px;
+.dialogBox i {
+  text-align: center;
+  padding-right: 10px;
+}
+ #dialogImage {
+   text-align: center;
+   padding-top: 15px;
+   padding-bottom: 15px;
+   background: #224276;
+   z-index: 5;
+ }
+
+.close-button {
+  transition: .2s;
+  float: right;
+  margin-top: -15px;
+  padding-top: 15px;
+  height: 54px;
+  width: 54px;
+  background: #224276;
+}
+
+.close-button:hover {
+  color: #e0e0e0;
+  background: #dc1417;
+}
+
+#dialogBottom {
+  z-index: 5;
+  position: absolute;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background: #224276;
+  bottom: 0;
+  left: 0;
+  width: 500px;
+  transition: all .2s;
+}
+
+#dialogBottom:hover {
+  background: #4883ee;
+}
+
+.elementAdd {
+  height: 500px;
   width: 500px;
   color: #e0e0e0;
   background: #2e59a0;
+  overflow-y: auto;
 }
 
 

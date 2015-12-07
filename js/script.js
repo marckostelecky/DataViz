@@ -5,6 +5,7 @@ $(document).ready(function(){
   var uploadVisible = false;
   var bg = document.getElementById("background");
   var currentGraph = null;
+  var elementNum = 0;
   onHover();
   /*
    * onHover()
@@ -15,10 +16,10 @@ $(document).ready(function(){
     var clicked = false;
 
     /* Interaction functionality when using the buttons on the navbar
-    *  mouseenter appends a hoverinfo css
-    *  click is what happens when you click
-    *  mouseleave will remove the appended elements
-    * */
+     *  mouseenter appends a hoverinfo css
+     *  click is what happens when you click
+     *  mouseleave will remove the appended elements
+     * */
     $(".option-icons li").on({
       mouseenter: function () {
         var title = $(this).attr('data-title');
@@ -29,7 +30,9 @@ $(document).ready(function(){
           _this.find(".hoverinfo").addClass("active");
         }, 50);
       },
-
+      /* Click functionality for original Option Icons
+       *
+       */
       click: function() {
         var _this = $(this);
         if (clicked == false) {
@@ -48,16 +51,16 @@ $(document).ready(function(){
               '<i class="fa fa-map"></i>' +
               '</li>';
           }
-            else if (_this.attr('id') == "add") {
-              if (currentGraph == 'bar') {
-
-              }
-              else if (currentGraph == 'map') {
-
-              }
-              else {
-                alert('You must have an open data set or be creating a data set in order to add an element to it!');
-              }
+          else if (_this.attr('id') == "add") {
+            if (currentGraph == 'bar') {
+              newElement();
+            }
+            else if (currentGraph == 'map') {
+              newElement();
+            }
+            else {
+              alert('You must have an open data set or be creating a data set in order to add an element to it!');
+            }
           } else {
 
           }
@@ -70,7 +73,7 @@ $(document).ready(function(){
           }, 50);
 
           /*
-          * Code for the Create button
+           * Code for the Create button
            */
           $(".create li").on({
             mouseenter: function () {
@@ -86,11 +89,22 @@ $(document).ready(function(){
             click: function () {
               var title = $(this).attr('data-title');
               if (title == "New Bar Graph") {
-                // bar();
-              }
+                if ($('.elementAdd').length == 0) {
+                  barCreate();
+                }
+                else {
+                  removeDialog();
+                  barCreate();
+                }
+            }
               else if (title == "New Map Graph") {
-                bg.style.visibility = 'hidden';
-                mapCreate();
+                if ($('.elementAdd').length == 0) {
+                  mapCreate();
+                }
+                else {
+                  removeDialog();
+                  mapCreate();
+                }
               }
             },
 
@@ -103,42 +117,42 @@ $(document).ready(function(){
             }
           });
 
-      /*
-       * Code for the Create button
-       */
-      $(".upload li").on({
-        mouseenter: function () {
-          var title = $(this).attr('data-title');
-          var _this = $(this);
-          $(this).append('<div class="hoverinfo2">' + title + '</div>');
+          /*
+           * Code for the Create button
+           */
+          $(".upload li").on({
+            mouseenter: function () {
+              var title = $(this).attr('data-title');
+              var _this = $(this);
+              $(this).append('<div class="hoverinfo2">' + title + '</div>');
 
-          setTimeout(function () {
-            _this.find(".hoverinfo2").addClass("active");
-          }, 50);
-        },
+              setTimeout(function () {
+                _this.find(".hoverinfo2").addClass("active");
+              }, 50);
+            },
 
-        click: function () {
-          var title = $(this).attr('data-title');
-          if (title == "Upload Bar Graph") {
-            // bar();
-          }
-          else if (title == "Upload Map Graph") {
-            bg.style.visibility = 'hidden';
-            upload();
-          }
-        },
+            click: function () {
+              var title = $(this).attr('data-title');
+              if (title == "Upload Bar Graph") {
+                // bar();
+              }
+              else if (title == "Upload Map Graph") {
+                bg.style.visibility = 'hidden';
+                upload();
+              }
+            },
 
-        mouseleave: function () {
-          var hover = $(this).find(".hoverinfo2");
-          hover.removeClass("active");
-          setTimeout(function () {
-            $(hover).remove();
-          }, 200);
+            mouseleave: function () {
+              var hover = $(this).find(".hoverinfo2");
+              hover.removeClass("active");
+              setTimeout(function () {
+                $(hover).remove();
+              }, 200);
+            }
+          });
         }
-      });
-  }
-    clicked = true;
-  },
+        clicked = true;
+      },
       // mouseleave for option icons
       mouseleave: function () {
         var hover = $(this).find(".hoverinfo");
@@ -166,15 +180,55 @@ $(document).ready(function(){
       fuel_stations();
     }}
 
-  function mapCreate() {
+  function barCreate() {
+    currentGraph = 'bar';
 
+    $('.dialogBox').append('<div id="dialogImage">' +
+    '<i class="fa fa-bar-chart"></i>' + 'New Bar Graph' +
+    '<div class="close-button"><i class="fa fa-times"></i></div>' +
+    '</div>' + '<div class="elementAdd"></div>' +
+    '<div id="dialogBottom">Create!</div>');
+
+    $('.close-button').on({
+      click: function () {
+        removeDialog();
+      }
+    });
+
+  }
+  function mapCreate() {
     currentGraph = 'map';
 
-   $('.dialogBox').append('<div class="createMap">' +
-    '<i class="fa fa-map"></i>' + ' New Map Graph' +
-    '</div>');
+    $('.dialogBox').append('<div id="dialogImage">' +
+    '<i class="fa fa-map"></i>' + 'New Map Graph' +
+    '<div class="close-button"><i class="fa fa-times"></i></div>' +
+    '</div>' + '<div class="elementAdd"></div>' +
+    '<div id="dialogBottom">Create!</div>');
 
-    map();
+    $('.close-button').on({
+      click: function () {
+        removeDialog();
+      }
+    });
+
+    //map();
+    //bg.style.visibility = 'hidden';
+  }
+
+  function newElement() {
+    //$('.elementAdd').append('<div class="element">' + elementNum + '</div>')
+   // $('.element').attr("id", elementNum);
+    d3.selectAll('.elementAdd div')
+      .enter().append('div')
+      .attr('class', '.element');
+    elementNum++;
+  }
+
+  function removeDialog() {
+    $('#dialogImage').remove();
+    $('.elementAdd').remove();
+    $('#dialogBottom').remove();
+    elementNum = 0;
   }
 });
 
