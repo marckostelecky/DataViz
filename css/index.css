@@ -92,7 +92,7 @@ main {
 }
 
 .add {
-  color: #42a021;
+  color: #444444;
   -webkit-backface-visibility: hidden;
   /* Chrome, Safari, Opera */
   backface-visibility: hidden;
@@ -103,11 +103,11 @@ main {
 
 .add:hover {
   color: #e0e0e0;
-  background-color: #42a021;
+  background-color: #444444;
 }
 
 .delete {
-  color: #a0141b;
+  color: #444444;
   -webkit-backface-visibility: hidden;
   /* Chrome, Safari, Opera */
   backface-visibility: hidden;
@@ -118,7 +118,7 @@ main {
 
 .delete:hover {
   color: #e0e0e0;
-  background-color: #a0141b;
+  background-color: #444444;
 }
 
 .options {
@@ -264,11 +264,11 @@ main {
 }
 
 .add .hoverinfo {
-  background: #42a021;
+  background: #444444;
 }
 
 .delete .hoverinfo {
-  background: #a0141b;
+  background: #444444;
 }
 
 .options .hoverinfo {
@@ -340,7 +340,6 @@ main {
 
 .dialogBox i {
   text-align: center;
-  padding-right: 10px;
 }
  #dialogImage {
    text-align: center;
@@ -349,6 +348,46 @@ main {
    background: #224276;
    z-index: 5;
  }
+
+ #dialogImage i.fa.fa-map {
+   padding-right: 10px;
+ }
+
+#dialogImage i.fa.fa-bar-chart {
+  padding-right: 10px;
+}
+
+.addButton {
+  transition: .2s;
+  float: left;
+  margin-top: -15px;
+  padding-top: 15px;
+  height: 54px;
+  width: 54px;
+  color: #42a021;
+  background: #224276;
+}
+
+.addButton:hover {
+  color: #e0e0e0;
+  background: #42a021;
+}
+
+.deleteButton {
+  transition: .2s;
+  float: left;
+  margin-top: -15px;
+  padding-top: 15px;
+  height: 54px;
+  width: 54px;
+  color: #a0141b;
+  background: #224276;
+}
+
+.deleteButton:hover {
+  color: #e0e0e0;
+  background:#a0141b;
+}
 
 .close-button {
   transition: .2s;
@@ -364,6 +403,8 @@ main {
   color: #e0e0e0;
   background: #dc1417;
 }
+
+
 
 #dialogBottom {
   z-index: 5;
@@ -390,4 +431,18 @@ main {
   overflow-y: auto;
 }
 
+.element {
+  display: inline-block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  white-space: nowrap;
+}
 
+.element #title {
+  padding-left: 5px;
+  padding-right: 10px;
+}
+
+.element .keyboard {
+  color: #222222;
+}

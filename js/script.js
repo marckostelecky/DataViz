@@ -54,10 +54,8 @@ $(document).ready(function(){
           }
           else if (_this.attr('id') == "add") {
             if (currentGraph == 'bar') {
-              newElement();
             }
             else if (currentGraph == 'map') {
-              newElement();
             }
             else {
               alert('You must have an open data set or be creating a data set in order to add an element to it!');
@@ -92,19 +90,23 @@ $(document).ready(function(){
               if (title == "New Bar Graph") {
                 if ($('.elementAdd').length == 0) {
                   barCreate();
+                  newElement();
                 }
                 else {
                   removeDialog();
                   barCreate();
+                  newElement();
                 }
             }
               else if (title == "New Map Graph") {
                 if ($('.elementAdd').length == 0) {
                   mapCreate();
+                  newElement();
                 }
                 else {
                   removeDialog();
                   mapCreate();
+                  newElement();
                 }
               }
             },
@@ -201,11 +203,24 @@ $(document).ready(function(){
     ]
     };
 
-    $('.dialogBox').append('<div id="dialogImage">' +
+    $('.dialogBox').append('<div id="dialogImage">' + '<div class="addButton"><i class="fa fa-plus"></i></div>' +
+    '<div class="deleteButton"><i class="fa fa-minus"></i></div>' +
     '<i class="fa fa-bar-chart"></i>' + 'New Bar Graph' +
     '<div class="close-button"><i class="fa fa-times"></i></div>' +
     '</div>' + '<div class="elementAdd"></div>' +
     '<div id="dialogBottom">Create!</div>');
+
+    $('.addButton').on({
+      click: function () {
+        newElement();
+      }
+    });
+
+    $('.deleteButton').on({
+      click: function () {
+        removeElement();
+      }
+    });
 
     $('.close-button').on({
       click: function () {
@@ -216,12 +231,32 @@ $(document).ready(function(){
   }
   function mapCreate() {
     currentGraph = 'map';
+    baseCase = {"data": [
+      {"category": "0", "value": 0},
+      {"category": "1", "value": 0},
+      {"category": "2", "value": 0}
+    ]
+    };
 
     $('.dialogBox').append('<div id="dialogImage">' +
+    '<div class="addButton"><i class="fa fa-plus"></i></div>' +
+    '<div class="deleteButton"><i class="fa fa-minus"></i></div>' +
     '<i class="fa fa-map"></i>' + 'New Map Graph' +
     '<div class="close-button"><i class="fa fa-times"></i></div>' +
     '</div>' + '<div class="elementAdd"></div>' +
     '<div id="dialogBottom">Create!</div>');
+
+    $('.addButton').on({
+      click: function () {
+        newElement();
+      }
+    });
+
+    $('.deleteButton').on({
+      click: function () {
+        removeElement();
+      }
+    });
 
     $('.close-button').on({
       click: function () {
@@ -234,9 +269,17 @@ $(document).ready(function(){
   }
 
   function newElement() {
+    baseCase.data.push({"category": "3", "value": 0});
+    refreshElement();
+  }
+
+  function removeElement() {
+    baseCase.data.pop();
+    refreshElement();
+  }
+  function refreshElement() {
     //$('.elementAdd').append('<div class="element">' + elementNum + '</div>')
    // $('.element').attr("id", elementNum);
-    baseCase.data.push({"category": "3", "value": 0});
 
     d3.selectAll('.element').remove();
 
@@ -246,12 +289,17 @@ $(document).ready(function(){
       .attr('id', function(d, i) { return i;})
       .attr('class', 'element');
 
-      $('.element').each(function(i, e) {
-      $(this).append('Title' +'<input type="text" class="keyboard" placeholder="'
-      + baseCase.data[i].category
-      +'"/>');
-    });
+    if (currentGraph == 'bar') {
+      $('.element').each(function (i, e) {
+        $(this).append('<span id="title">Title</span>' + '<input type="text" class="keyboard" placeholder="' + baseCase.data[i].category + '"/>' + '<span id="title">Value</span>' + '<input type="text" class="keyboard" placeholder="' + baseCase.data[i].value + '"/>');
+      });
+    } else if (currentGraph == "map") {
+      $('.element').each(function (i, e) {
+        $(this).append('<span id="title">Long</span>' + '<input type="text" class="keyboard" placeholder="' + baseCase.data[i].category + '"/>' + '<span id="title">Lat</span>' + '<input type="text" class="keyboard" placeholder="' + baseCase.data[i].value + '"/>');
+      });
+    }
 
+    makeKeyboard();
     elementNum++;
   }
 
