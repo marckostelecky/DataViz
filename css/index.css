@@ -357,6 +357,7 @@ svg.map .data-point {
 }
 
 svg.barChart {
+  padding: 100px 100px 100px 100px;
 }
 
 .bar {
@@ -375,6 +376,17 @@ svg.barChart {
 
 .bar.active:hover {
   fill: #c4141b;
+}
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+
 }
 
 .dialogBox{
