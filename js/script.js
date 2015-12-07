@@ -11,6 +11,7 @@ $(document).ready(function(){
   var currentGraph = null;
   var elementNum = 0;
   var baseChart;
+  var data;
 
   onHover();
   /*
@@ -59,11 +60,11 @@ $(document).ready(function(){
               '</li>';
           }
           else if (_this.attr('class') == "add" || _this.attr('class') == "delete" ) {
-              alert('You must have an open data set in order to add an element to it!');
-          } else if (_this.attr('class') == "add active" || _this.attr('class') == "delete active" ) {
-            alert(':o');
+              alert('You must have an open data set in order to manipulate an element in it!');
+          } else if (_this.attr('class') == "add active") {
+            addElement();
           } else if ( _this.attr('class') == "delete active") {
-
+            deleteElement();
           } else {
 
           }
@@ -340,5 +341,16 @@ $(document).ready(function(){
   function activateButtons() {
     $('.add').addClass('active');
     $('.delete').addClass('active');
+  }
+
+  function deleteElement() {
+    d3.selectAll(".bar")
+      .classed("active", true);
+    $('.bar').on("click", function () {
+    })
+  }
+
+  function addElement() {
+
   }
 });

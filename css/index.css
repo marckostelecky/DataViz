@@ -368,6 +368,15 @@ svg.barChart {
   fill: #4883ee;
 }
 
+.bar.active {
+  transition: all 0.2s;
+  fill: #a0141b;
+}
+
+.bar.active:hover {
+  fill: #c4141b;
+}
+
 .dialogBox{
   position: absolute;
   top: 15%;
