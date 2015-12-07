@@ -243,6 +243,7 @@ $(document).ready(function(){
         });
         console.log(data.data);
         bar(data);
+        removeDialog();
       }
     });
 
@@ -260,7 +261,7 @@ $(document).ready(function(){
         '<div class="addButton"><i class="fa fa-plus"></i></div>' +
         '<div class="deleteButton"><i class="fa fa-minus"></i></div>' +
         '<i class="fa fa-map"></i>' + 'New Map Graph' +
-        '<div class="close-button"><i class="fa fa-times"></i></div>' +
+        '<div class="closeButton"><i class="fa fa-times"></i></div>' +
         '</div>' + '<div class="elementAdd"></div>' +
         '<div id="dialogBottom" class="acceptButton">Create!</div>');
 
@@ -276,7 +277,7 @@ $(document).ready(function(){
       }
     });
 
-    $('.close-button').on({
+    $('.closeButton').on({
       click: function () {
         removeDialog();
       }
@@ -284,7 +285,7 @@ $(document).ready(function(){
 
     $('.acceptButton').on({
       click: function() {
-        map(baseCase);
+        alert('Creating a map is not yet implemented.');
       }
     });
 
