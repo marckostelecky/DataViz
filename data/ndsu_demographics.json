@@ -1,7 +1,8 @@
-{
+{ "data": [
 	{"category": "North Dakota", "value": 41.0},
 	{"category": "Minnesota", "value": 44.0},
 	{"category": "Other U.S.", "value": 5.9},
 	{"category": "International", "value": 6.9},
 	{"category": "Permanent Resident", "value": 1.5}
+]
 }

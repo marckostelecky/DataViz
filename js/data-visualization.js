@@ -19,7 +19,10 @@ var height = 786;
  * http://naciscdn.org/naturalearth/10m/cultural/ne_10m_populated_places.zip
  */
 function map(data) {
-	// Create the svg element in which we will create the map.
+	// Delete the old visualization, if there is one.
+	d3.select("main svg").remove();
+
+	// Create the svg element where we will create the map.
 	var map_svg = d3.select("main").append("svg")
 		.attr("width", width)
 		.attr("height", height)
@@ -59,9 +62,9 @@ function map(data) {
 
 	// Add the user's data to the map.
 	if (data != null) {
-		d3.json(data, function(error, altfuelstations) {
+		d3.json(data, function(error, data) {
 			if (error) return console.error(error);
-			console.log(altfuelstations);
+			console.log(data);
 			// Choose a projection for the map data.
 			var projection = d3.geo.albers()
 				.center([0, 35])
@@ -75,8 +78,8 @@ function map(data) {
 			// Add the data to the map.
 			map_svg = d3.select(".map");
 			map_svg.append("path")
-				.datum(topojson.feature(altfuelstations,
-							altfuelstations.objects.altfuelstations))
+				.datum(topojson.feature(data,
+							data.objects.dataPoints))
 				.attr("d", projection_path)
 				.attr("class", "data-point");
 		});
@@ -87,20 +90,42 @@ function map(data) {
  * Make a bar graph.
  */
 function bar(data) {
+	// Delete the old visualization, if there is one.
+	d3.select("main svg").remove();
+
+	// Create the svg element where we will create the bar graph.
 	var bar_svg = d3.select("main").append("svg")
 		.attr("width", width)
 		.attr("height", height)
 		.attr("class", "bar-chart");
 
-	d3.json(data, function(error, enrollment) {
+	var x = d3.scale.linear()
+		.range([0, width]);
+
+	var barHeight = 20
+
+	d3.json(data, function(error, data) {
 		if (error) return console.error(error);
-		console.log(us);
+		console.log(data);
+
+		x.domain([0, d3.max(data.data, function(d) { return d.value; } )]);
+		bar_svg.attr("height", barHeight * data.length);
 		
-		d3.select(".bar-chart")
-			.selectAll("div")
-			.data(data)
-			.enter().append("div")
-			.style("width", function(d) { return d * 10 + "px"; })
-			.text(function(d) { return d; });
+		var bar = bar_svg.selectAll("g")
+			.data(data.data)
+			.enter().append("g")
+			.attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
+
+		bar.append("rect")
+			.attr("width", function(d) { return x(d.value); })
+			.attr("height", barHeight - 1)
+			.style("fill", "blue");
+
+		bar.append("text")
+			.attr("x", function(d) { return x(d.value) - 3; })
+			.attr("y", barHeight / 2)
+			.attr("dy", ".35em")
+			.text(function(d) { return d.category; });
+
 	});
 }
