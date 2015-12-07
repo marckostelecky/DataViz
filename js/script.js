@@ -252,6 +252,7 @@ $(document).ready(function(){
 
   // Make the dialog box for creating a bar graph.
   function barCreate() {
+    activateButtons();
     currentGraph = 'bar';
     baseCase = {"data": [
       {"category": "0", "value": 0},
@@ -302,6 +303,7 @@ $(document).ready(function(){
 
   // Make the dialog box for creating a map.
   function mapCreate() {
+    activateButtons();
     currentGraph = 'map';
     baseCase = {"data": [
       {"category": "0", "value": 0},
@@ -449,6 +451,7 @@ $(document).ready(function(){
 
         bar(currentData);
         removeDialog();
+        activateButtons();
       }
     })
   }
