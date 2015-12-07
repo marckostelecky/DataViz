@@ -2,6 +2,7 @@
  * Created by Squeelch on 11/27/2015.
  */
 $(document).ready(function(){
+
   var uploadVisible = false;
   var bg = document.getElementById("background");
   var currentGraph = null;
